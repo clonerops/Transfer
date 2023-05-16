@@ -1,0 +1,9 @@
+    {
+        "fullname": "نام و نام خانوادگی",
+        "nationalcode": "کدملی",
+        "province": "استان",
+        "city": "شهر",
+        "phone": "تلفن ثابت",
+        "mobile": "تلفن همراه",
+        "address": "آدرس"
+    }

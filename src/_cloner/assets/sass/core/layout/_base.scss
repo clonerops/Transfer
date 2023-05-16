@@ -1,0 +1,84 @@
+//
+// Root
+//
+
+@font-face {
+    font-family: Yekan;
+    src: url('../../../fonts/Yekan.ttf');
+    font-style: normal;
+}
+
+html {
+    font-family: Yekan;
+    text-size-adjust: 100%;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: $root-font-size !important;
+    font-weight: $font-weight-base;
+    font-family: Yekan;
+
+    // Tablet mode
+    @include media-breakpoint-down(lg) {
+        font-size: $root-font-size-lg !important;
+    }
+
+    // Mobile mode
+    @include media-breakpoint-down(md) {
+        font-size: $root-font-size-md !important;
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    a:hover,
+    a:active,
+    a:focus {
+        text-decoration: none !important;
+    }
+}
+
+canvas {
+    user-select: none;
+}
+
+// Angular integration
+router-outlet {
+    display: none;
+}
+
+.container {
+    width: 100% !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+
+    @media only screen and (min-width: 576px) {
+        max-width: 540px !important;
+    }
+
+    @media only screen and (min-width: 768px) {
+        max-width: 720px !important;
+    }
+
+    @media only screen and (min-width: 992px) {
+        max-width: 960px !important;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        max-width: 1140px !important;
+    }
+
+    @media only screen and (min-width: 1400px) {
+        max-width: 1320px !important;
+    }
+}
