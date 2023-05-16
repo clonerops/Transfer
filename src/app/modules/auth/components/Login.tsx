@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as Yup from 'yup'
-import clsx from 'clsx'
 import { useFormik } from 'formik'
-import { getUserByToken, login, loginUser } from '../core/_requests'
+import { loginUser } from '../core/_requests'
 import { useAuth } from '../core/Auth'
 import { useGetCaptcha } from '../core/_hooks'
 import Captcha from '../../../../_cloner/helpers/components/Captcha'
@@ -27,14 +26,6 @@ const initialValues = {
   password: '',
   captcha: '',
 }
-/*
-  Formik+YUP+Typescript:
-  https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
-  https://medium.com/@maurice.de.beijer/yup-validation-and-typescript-and-formik-6c342578a20e
-*/
-
-
-
 
 export function Login() {
   const [loading, setLoading] = useState<boolean>(false)
@@ -47,11 +38,11 @@ export function Login() {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       setLoading(true)
       try {
-        const auth = await loginUser(values.username, values.password, captcha.tokenString, values.captcha)
+        const {data: auth} = await loginUser(values.username, values.password, captcha.tokenString, values.captcha)
         saveAuth(auth)
-        setCurrentUser(auth.jwtToken)
+        setCurrentUser(auth)
+
       } catch (error) {
-        console.error(error)
         saveAuth(undefined)
         setStatus('اطلاعات ورود نادرست می باشد')
         setSubmitting(false)
@@ -98,31 +89,7 @@ export function Login() {
 
       {/* begin::Form group */}
       <Input type="password" login={true} getFieldProps={formik.getFieldProps} touched={formik.touched.password} errors={formik.errors.password} name={"password"} title="کلمه عبور"></Input>
-      {/* <div className='fv-row mb-3'>
-        <label className='form-label fw-bolder text-dark fs-6 mb-0'>رمز عبور</label>
-        <input
-          placeholder='رمز عبور'
-          type='password'
-          autoComplete='off'
-          {...formik.getFieldProps('password')}
-          className={clsx(
-            'form-control bg-transparent',
-            {
-              'is-invalid': formik.touched.password && formik.errors.password,
-            },
-            {
-              'is-valid': formik.touched.password && !formik.errors.password,
-            }
-          )}
-        />
-        {formik.touched.password && formik.errors.password && (
-          <div className='fv-plugins-message-container'>
-            <div className='fv-help-block'>
-              <span role='alert'>{formik.errors.password}</span>
-            </div>
-          </div>
-        )}
-      </div> */}
+     
       <Captcha captcha={captcha?.image} refetch={refetch} />
       <Input type="text" login={true} getFieldProps={formik.getFieldProps} touched={formik.touched.captcha} errors={formik.errors.captcha} name={"captcha"} title="کد امنیتی"></Input>
       {/* begin::Action */}

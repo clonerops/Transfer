@@ -7,6 +7,7 @@ import {getCSSVariableValue} from '../../_cloner/assets/ts/_utils'
 import {WithChildren} from '../../_cloner/helpers'
 import CustomerCallRegistration from '../pages/dashboard/CustomerCallRegistration'
 import ConnectToCallCenter from '../pages/dashboard/ConnectToCallCenter'
+import CarDelayReports from '../modules/reports/CarDelayReports'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -21,6 +22,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
+        <Route path='carDelay' element={<CarDelayReports />} />
         {/* Lazy Modules */}
         <Route
           path='crafted/pages/profile/*'

@@ -1,7 +1,76 @@
-import {AuthModel} from './_models'
+// import {AuthModel, AuthenticationModel} from './_models'
+
+// const AUTH_LOCAL_STORAGE_KEY = 'kt-auth-react-v'
+// const getAuth = (): AuthenticationModel  | undefined => {
+//   if (!localStorage) {
+//     return
+//   }
+
+//   const lsValue: string | null = localStorage.getItem(AUTH_LOCAL_STORAGE_KEY)
+//   if (!lsValue) {
+//     return
+//   }
+
+//   try {
+//     const auth: AuthenticationModel  = JSON.parse(lsValue) as AuthenticationModel 
+//     if (auth) {
+//       // You can easily check auth_token expiration also
+//       return auth
+//     }
+//   } catch (error) {
+//     console.error('AUTH LOCAL STORAGE PARSE ERROR', error)
+//   }
+// }
+
+// const setAuth = (auth: AuthenticationModel ) => {
+//   if (!localStorage) {
+//     return
+//   }
+
+//   try {
+//     const lsValue = JSON.stringify(auth)
+//     localStorage.setItem(AUTH_LOCAL_STORAGE_KEY, lsValue)
+//   } catch (error) {
+//     console.error('AUTH LOCAL STORAGE SAVE ERROR', error)
+//   }
+// }
+
+// const removeAuth = () => {
+//   if (!localStorage) {
+//     return
+//   }
+
+//   try {
+//     localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY)
+//   } catch (error) {
+//     console.error('AUTH LOCAL STORAGE REMOVE ERROR', error)
+//   }
+// }
+
+// export function setupAxios(axios: any) {
+//   axios.defaults.headers.Accept = 'application/json'
+//   axios.interceptors.request.use(
+//     (config: {headers: {Authorization: string}}) => {
+//       const auth = getAuth()
+//       if (auth && auth.data?.jwtToken) {
+//         config.headers.Authorization = `Bearer ${auth.data.jwtToken}`
+//       }
+
+//       return config
+//     },
+//     (err: any) => Promise.reject(err)
+//   )
+// }
+
+// export {getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY}
+import {AuthenticationModel} from './_models'
 
 const AUTH_LOCAL_STORAGE_KEY = 'kt-auth-react-v'
-const getAuth = (): AuthModel | undefined => {
+// const getAuth = (): AuthModel | undefined => {
+//   if (!localStorage) {
+//     return
+//   }
+const getAuth = (): AuthenticationModel | undefined => {
   if (!localStorage) {
     return
   }
@@ -12,7 +81,8 @@ const getAuth = (): AuthModel | undefined => {
   }
 
   try {
-    const auth: AuthModel = JSON.parse(lsValue) as AuthModel
+    // const auth: AuthModel = JSON.parse(lsValue) as AuthModel
+    const auth: AuthenticationModel = JSON.parse(lsValue) as AuthenticationModel
     if (auth) {
       // You can easily check auth_token expiration also
       return auth
@@ -22,7 +92,11 @@ const getAuth = (): AuthModel | undefined => {
   }
 }
 
-const setAuth = (auth: AuthModel) => {
+// const setAuth = (auth: AuthModel) => {
+//   if (!localStorage) {
+//     return
+//   }
+const setAuth = (auth: AuthenticationModel) => {
   if (!localStorage) {
     return
   }
@@ -35,25 +109,28 @@ const setAuth = (auth: AuthModel) => {
   }
 }
 
-const removeAuth = () => {
-  if (!localStorage) {
-    return
-  }
+// const removeAuth = () => {
+//   if (!localStorage) {
+//     return
+//   }
 
-  try {
-    localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY)
-  } catch (error) {
-    console.error('AUTH LOCAL STORAGE REMOVE ERROR', error)
-  }
-}
+//   try {
+//     localStorage.removeItem(AUTH_LOCAL_STORAGE_KEY)
+//   } catch (error) {
+//     console.error('AUTH LOCAL STORAGE REMOVE ERROR', error)
+//   }
+// }
 
 export function setupAxios(axios: any) {
   axios.defaults.headers.Accept = 'application/json'
   axios.interceptors.request.use(
     (config: {headers: {Authorization: string}}) => {
       const auth = getAuth()
-      if (auth && auth.api_token) {
-        config.headers.Authorization = `Bearer ${auth.api_token}`
+      // if (auth && auth.api_token) {
+      //   config.headers.Authorization = `Bearer ${auth.api_token}`
+      // }
+      if (auth && auth.data?.jwtToken) {
+        config.headers.Authorization = `${auth.data.jwtToken}`
       }
 
       return config
@@ -62,4 +139,4 @@ export function setupAxios(axios: any) {
   )
 }
 
-export {getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY}
+export {getAuth, setAuth, AUTH_LOCAL_STORAGE_KEY}

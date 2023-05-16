@@ -1,5 +1,5 @@
 export interface AuthModel {
-  api_token: string
+  jwtToken: string
   refreshToken?: string
 }
 
@@ -44,26 +44,9 @@ export interface UserSocialNetworksModel {
 }
 
 export interface UserModel {
-  id: number
-  username: string
-  password: string | undefined
-  email: string
-  first_name: string
-  last_name: string
-  fullname?: string
-  occupation?: string
-  companyName?: string
-  phone?: string
-  roles?: Array<number>
-  pic?: string
-  language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
-  timeZone?: string
-  website?: 'https://keenthemes.com'
-  emailSettings?: UserEmailSettingsModel
+  firstName: string
+  lastName: string
   auth?: AuthModel
-  communication?: UserCommunicationModel
-  address?: UserAddressModel
-  socialNetworks?: UserSocialNetworksModel
 }
 
 export interface AuthModelS {
@@ -71,4 +54,35 @@ export interface AuthModelS {
   password: string
   captchaToken: string
   captchaCode: string
+}
+
+export interface AuthenticationModel {
+  data?: CustomAuthModel
+}
+
+export interface CustomAuthModel {
+  id?: string
+  dealerId?: number
+  jwtToken?: string
+  firstName?: string
+  lastName?: string
+  photo?: string
+  username?: string
+  refreshToken?: string
+  tokenExpireTime?: string
+  userContractors?: Array<string>
+  userParkings?: Array<string>
+  userRoles?: Array<string>
+  roleMenus?: RoleMenu
+
+}
+
+export interface RoleMenu {
+  icon_css?: string
+  menu_url?: string
+  menuname?: string
+  menunno?: string
+  parent?: string
+  menu_order?: number
+  children?: RoleMenu
 }

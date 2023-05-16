@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {AuthModel, UserModel, AuthModelS} from './_models'
+import {AuthModel, UserModel, AuthModelS, AuthenticationModel} from './_models'
 import http from "../../../../_cloner/helpers/apiConfig"
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -30,10 +30,9 @@ export function getUserByToken(token: string) {
 }
 
 
-const loginUser = async (username: string, password: string, captchaToken: string, captchaCode: string) => {
+const loginUser =  (username: string, password: string, captchaToken: string, captchaCode: string) => {
   const user = { username, password, captchaToken, captchaCode }
-  const { data } = await http.post("/Users/authenticate", user)
-  return data
+  return http.post("/Users/authenticate", user)
 }
 
 const getCaptcha = async () => {

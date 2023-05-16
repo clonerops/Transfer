@@ -8,26 +8,25 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react'
-import {LayoutSplashScreen} from '../../../../_cloner/layout/core'
-import {AuthModel, UserModel} from './_models'
+import { LayoutSplashScreen } from '../../../../_cloner/layout/core'
+import { AuthenticationModel } from './_models'
 import * as authHelper from './AuthHelpers'
-import {getUserByToken} from './_requests'
-import {WithChildren} from '../../../../_cloner/helpers'
+import { WithChildren } from '../../../../_cloner/helpers'
 
 type AuthContextProps = {
-  auth: AuthModel | undefined
-  saveAuth: (auth: AuthModel | undefined) => void
-  currentUser: UserModel | undefined
-  setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>
+  auth: AuthenticationModel | undefined
+  saveAuth: (auth: AuthenticationModel | undefined) => void
+  currentUser: AuthenticationModel | undefined
+  setCurrentUser: Dispatch<SetStateAction<AuthenticationModel | undefined>>
   logout: () => void
 }
 
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
-  saveAuth: () => {},
+  saveAuth: () => { },
   currentUser: undefined,
-  setCurrentUser: () => {},
-  logout: () => {},
+  setCurrentUser: () => { },
+  logout: () => { },
 }
 
 const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState)
@@ -36,15 +35,16 @@ const useAuth = () => {
   return useContext(AuthContext)
 }
 
-const AuthProvider: FC<WithChildren> = ({children}) => {
-  const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
-  const [currentUser, setCurrentUser] = useState<UserModel | undefined>()
-  const saveAuth = (auth: AuthModel | undefined) => {
+const AuthProvider: FC<WithChildren> = ({ children }) => {
+  const [auth, setAuth] = useState<AuthenticationModel | undefined>(authHelper.getAuth())
+  const [currentUser, setCurrentUser] = useState<AuthenticationModel | undefined>()
+
+  const saveAuth = (auth: AuthenticationModel | undefined) => {
     setAuth(auth)
     if (auth) {
       authHelper.setAuth(auth)
     } else {
-      authHelper.removeAuth()
+      // authHelper.removeAuth()
     }
   }
 
@@ -54,41 +54,41 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   }
 
   return (
-    <AuthContext.Provider value={{auth, saveAuth, currentUser, setCurrentUser, logout}}>
+    <AuthContext.Provider value={{ auth, saveAuth, currentUser, setCurrentUser, logout }}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-const AuthInit: FC<WithChildren> = ({children}) => {
-  const {auth, logout, setCurrentUser} = useAuth()
-  const didRequest = useRef(false)
+const AuthInit: FC<WithChildren> = ({ children }) => {
+  const { auth, logout, setCurrentUser } = useAuth()
+  // const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
   // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
   useEffect(() => {
-    const requestUser = async (apiToken: string) => {
+    const requestUser = async () => {
       try {
-        if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken)
-          if (data) {
-            setCurrentUser(data)
-          }
-        }
+        // if (!didRequest.current) {
+
+        // if (auth) {
+        setCurrentUser(auth)
+        // }
+        // }
       } catch (error) {
-        console.error(error)
-        if (!didRequest.current) {
-          logout()
-        }
+        // if (!didRequest.current) {
+        logout()
+        // }
       } finally {
         setShowSplashScreen(false)
       }
 
-      return () => (didRequest.current = true)
+      // return () => (didRequest.current = true)
     }
 
-    if (auth && auth.api_token) {
-      requestUser(auth.api_token)
-    } else {
+    if (auth && auth.data?.jwtToken) {
+      requestUser()
+    }
+    else {
       logout()
       setShowSplashScreen(false)
     }
@@ -98,4 +98,4 @@ const AuthInit: FC<WithChildren> = ({children}) => {
   return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
 }
 
-export {AuthProvider, AuthInit, useAuth}
+export { AuthProvider, AuthInit, useAuth }
