@@ -33,7 +33,7 @@ const Input = (props: any) => {
         <div className='fv-row mb-8'>
           <label className='form-label fs-6 fw-bolder text-dark'>{props.title}</label>
           <input
-            // {...props.getFieldProps(props.name)}
+            {...props.getFieldProps(props.name)}
             className={clsx(
               'form-control bg-transparent text-center font-VazirBold text-2xl h-14',
               {
