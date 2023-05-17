@@ -57,7 +57,20 @@ export interface AuthModelS {
 }
 
 export interface AuthenticationModel {
-  data?: CustomAuthModel
+  // data?: CustomAuthModel
+  id?: string
+  dealerId?: number
+  jwtToken?: string
+  firstName?: string
+  lastName?: string
+  photo?: string
+  username?: string
+  refreshToken?: string
+  tokenExpireTime?: string
+  userContractors?: Array<string>
+  userParkings?: Array<string>
+  userRoles?: Array<string>
+  roleMenus?: RoleMenu[]
 }
 
 export interface CustomAuthModel {
@@ -73,8 +86,7 @@ export interface CustomAuthModel {
   userContractors?: Array<string>
   userParkings?: Array<string>
   userRoles?: Array<string>
-  roleMenus?: RoleMenu
-
+  roleMenus?: RoleMenu[]
 }
 
 export interface RoleMenu {

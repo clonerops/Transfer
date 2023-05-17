@@ -21,13 +21,15 @@ const {PUBLIC_URL} = process.env
 
 const AppRoutes: FC = () => {
   const {currentUser} = useAuth()
+
+  console.log("currentUser", currentUser)
   return (
     <BrowserRouter basename={PUBLIC_URL}>
       <Routes>
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
           <Route path='logout' element={<Logout />} />
-          {localStorage.getItem("kt-auth-react-v") ? (
+          {currentUser ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
               <Route index element={<Navigate to='/dashboard' />} />

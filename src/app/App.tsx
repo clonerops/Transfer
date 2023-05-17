@@ -1,10 +1,10 @@
-import { Suspense } from 'react'
-import { Outlet } from 'react-router-dom'
-import { I18nProvider } from '../_cloner/i18n/i18nProvider'
-import { LayoutProvider, LayoutSplashScreen } from '../_cloner/layout/core'
-import { MasterInit } from '../_cloner/layout/MasterInit'
-import { AuthInit } from './modules/auth'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import {Suspense} from 'react'
+import {Outlet} from 'react-router-dom'
+import {I18nProvider} from '../_cloner/i18n/i18nProvider'
+import {LayoutProvider, LayoutSplashScreen} from '../_cloner/layout/core'
+import {MasterInit} from '../_cloner/layout/MasterInit'
+import {AuthInit} from './modules/auth'
+import {QueryClient, QueryClientProvider} from 'react-query'
 const App = () => {
   const queryClient = new QueryClient()
   return (
@@ -23,4 +23,4 @@ const App = () => {
   )
 }
 
-export { App }
+export {App}

@@ -2,9 +2,9 @@ import { useFormik } from 'formik'
 import * as Yup from "yup" 
 import Input from '../../../_cloner/helpers/components/Modules/Input'
 import { Card5 } from '../../../_cloner/partials/content/cards/Card5'
+import { useProvince } from '../../../_cloner/hooks/_hooks'
 
 const CarDelayReports = () => {
-
   const validatioSchema = Yup.object().shape({
     productNo: Yup.string()
       .required('شماره ساخت اجباری می باشد'),
@@ -19,7 +19,7 @@ const CarDelayReports = () => {
     initialValues,
     validationSchema: validatioSchema,
     onSubmit: async (values, { setStatus, setSubmitting }) => {
-      try {
+      try { 
 
       } catch (error) {
         setStatus('اطلاعات ورود نادرست می باشد')

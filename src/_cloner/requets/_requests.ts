@@ -32,7 +32,7 @@ const getPlateList = async () => {
 }
 
 const getProvince = async () => {
-    const { data } = await dashboardHttp.get("/SaleSystem/GetAllProvinces")
+    const { data } = await dashboardHttp.get('/SaleSystem/GetAllProvinces')
     return data
 }
 
@@ -40,6 +40,7 @@ const getCity = async (id: number) => {
     const { data } = await dashboardHttp.get(`/SaleSystem/GetProviceCities/${id}`)
     return data
 }
+
 
 export {
     getParkings,
