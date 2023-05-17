@@ -4,12 +4,11 @@ import Input from '../../../_cloner/helpers/components/Modules/Input'
 import {Card5} from '../../../_cloner/partials/content/cards/Card5'
 import {TablesWidget} from '../../../_cloner/helpers/components/TablesWidget'
 import CardDelayColumns from '../../../_cloner/fakedata/cardelarcolumns.json'
-import {useCarDelay} from './core/_hooks'
+import {CarDelayRequest, useCarDelayData} from './core/_hooks'
 import {useState} from 'react'
 import { getCarDelayData } from './core/_requests'
 
 const CarDelayReports = () => {
-  const [data, setData] = useState([])
   const validatioSchema = Yup.object().shape({
     productNo: Yup.string().required('شماره ساخت اجباری می باشد'),
   })
@@ -18,6 +17,9 @@ const CarDelayReports = () => {
     productNo: '',
   }
 
+  const { data: auc } = useCarDelayData()
+  console.log("auc", auc)
+
   // 111060557
 
   const formik = useFormik({
@@ -25,8 +27,9 @@ const CarDelayReports = () => {
     validationSchema: validatioSchema,
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       try {
-        const { data: carDelay } = await getCarDelayData(parseInt(values.productNo))
-        setData(carDelay)
+        // const { data: carDelay } = await getCarDelayData(parseInt(values.productNo))
+        // setData(carDelay)
+        CarDelayRequest.mutate({prodNo: values.productNo})
         setSubmitting(false)
       } catch (error) {
         setStatus('اطلاعات ورود نادرست می باشد')
@@ -35,7 +38,6 @@ const CarDelayReports = () => {
     },
   })
 
-  console.log("data", data)
 
   return (
     <Card5
