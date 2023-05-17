@@ -12,6 +12,7 @@ import { LayoutSplashScreen } from '../../../../_cloner/layout/core'
 import { AuthenticationModel } from './_models'
 import * as authHelper from './AuthHelpers'
 import { WithChildren } from '../../../../_cloner/helpers'
+import Cookies from 'js-cookie'
 
 type AuthContextProps = {
   auth: AuthenticationModel | undefined
@@ -72,6 +73,7 @@ const AuthInit: FC<WithChildren> = ({ children }) => {
 
         // if (auth) {
         setCurrentUser(auth)
+        
         // }
         // }
       } catch (error) {

@@ -1,5 +1,15 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
-export default axios.create({
-    baseURL: "https://transferapi.saipacorp.com"
+const token = Cookies.get('token')
+
+export const http = axios.create({
+    baseURL: "https://transferapi.saipacorp.com/",
 })
+
+export const dashboardHttp = axios.create({
+    baseURL: "https://transferapi.saipacorp.com/api",
+    headers: {'Authorization': 'Bearer '+ token}
+})
+
+

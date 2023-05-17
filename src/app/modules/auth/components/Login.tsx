@@ -7,6 +7,7 @@ import { useAuth } from '../core/Auth'
 import { useGetCaptcha } from '../core/_hooks'
 import Captcha from '../../../../_cloner/helpers/components/Captcha'
 import Input from '../../../../_cloner/helpers/components/Modules/Input'
+import Cookies from 'js-cookie'
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
@@ -41,6 +42,7 @@ export function Login() {
         const {data: auth} = await loginUser(values.username, values.password, captcha.tokenString, values.captcha)
         saveAuth(auth)
         setCurrentUser(auth)
+        Cookies.set("token", `${auth?.jwtToken}`)
 
       } catch (error) {
         saveAuth(undefined)

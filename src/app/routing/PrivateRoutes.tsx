@@ -20,9 +20,10 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
+        {/* Report Modules */}
+        <Route path='dashboard/report/carDelay' element={<CarDelayReports />} />
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
-        <Route path='carDelay' element={<CarDelayReports />} />
         {/* Lazy Modules */}
         <Route
           path='crafted/pages/profile/*'
