@@ -15,7 +15,7 @@ const App = () => {
             <AuthInit>
               <Outlet />
               <MasterInit />
-            </AuthInit>
+            </AuthInit  >
           </LayoutProvider>
         </I18nProvider>
       </Suspense>

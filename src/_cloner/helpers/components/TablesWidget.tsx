@@ -16,6 +16,7 @@ type Props = {
 }
 
 const TablesWidget: React.FC<Props> = ({title, loading, description, columns, delay, delayData}) => {
+  
   return (
     <div className={`card`}>
       {/* begin::Header */}

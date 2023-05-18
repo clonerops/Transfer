@@ -6,6 +6,8 @@ import {TablesWidget} from '../../../_cloner/helpers/components/TablesWidget'
 import CardDelayColumns from '../../../_cloner/fakedata/cardelarcolumns.json'
 import { useDelayRequest} from './core/_hooks'
 import ActionButton from '../../../_cloner/helpers/components/Modules/ActionButton'
+import MainGrid from '../../../_cloner/helpers/components/MainGrid'
+import { useState } from 'react'
 
 const CarDelayReports = () => {
 
@@ -40,6 +42,83 @@ const CarDelayReports = () => {
     },
   })
 
+  const coulDef = [
+    {
+        field: "billlandingid",
+        headerName: 'بارنامه',
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px', 'font-weight': 'bold' },
+        maxWidth: 100,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "prod_no",
+        headerName: 'شماره ساخت',
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        minWidth: 120,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "dealerName",
+        headerName: 'نمایندگی',
+        minWidth: 260,
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "driveR_NAME",
+        headerName: 'راننده',
+        minWidth: 200,
+        cellRenderer: (params: { data: { driveR_NAME: string } }) => params.data.driveR_NAME === "" ? <span>..............</span> : params.data.driveR_NAME,
+        cellStyle: { 'color': '#FFF' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "originDesc",
+        headerName: 'مبدا',
+        minWidth: 200,
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "destinationDesc",
+        headerName: 'مقصد',
+        minWidth: 200,
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "contractorDlvrDate",
+        headerName: 'تاریخ تحویل به پیمانکار',
+        minWidth: 200,
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "intervalTimeLong",
+        headerName: 'زمان مطابق برنامه',
+        minWidth: 160,
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+    {
+        field: "transferTimeLong_str",
+        headerName: 'زمان طی شده',
+        minWidth: 260,
+        cellStyle: { 'white-space': 'normal', 'font-size': '12px' },
+        autoHeight: true,
+        headerClass: 'bg-indigo-600'
+    },
+
+]
+
+console.log("CardDelayColumns", CardDelayColumns)
 
   return (
     <Card5
@@ -60,7 +139,8 @@ const CarDelayReports = () => {
           <ActionButton loading={isLoading} title='جستجو' />
         </section>
       </form>
-      <TablesWidget loading={isLoading} columns={CardDelayColumns} delayData={carDelayData} delay={true} title='نتیجه گزارش' />
+      <MainGrid data={carDelayData} columnDefs={coulDef} />
+      {/* <TablesWidget loading={isLoading} columns={CardDelayColumns} delayData={carDelayData} delay={true} title='نتیجه گزارش' /> */}
     </Card5>
   )
 }

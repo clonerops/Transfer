@@ -81,13 +81,6 @@
   scrollbar-color: #4942a2 rgb(255, 255, 255);
 }
 
-*::-webkit-scrollbar {width: 10px !important;}
-*::-webkit-scrollbar-track {background: rgb(255, 255, 255);}
-*::-webkit-scrollbar-thumb {background-color: #4942a2;border-radius: 20px;border: 3px solid rgb(255, 255, 255);}
-
-
-
-
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -46973,7 +46966,7 @@ code:not([class*=language-]) {
   transform: rotateZ(-270deg);
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   main,
 span,
 ol,
@@ -47295,7 +47288,7 @@ div:hover::-webkit-scrollbar-corner {
 .scroll-mx {
   margin-right: var(--kt-scrollbar-width) !important;
   margin-left: var(--kt-scrollbar-width) !important;
-}
+} */
 
 .rating {
   display: flex;
