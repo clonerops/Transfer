@@ -4,14 +4,18 @@ import {toAbsoluteUrl} from '../AssetHelpers'
 import {KTSVG} from './KTSVG'
 // import customerfieldinfo from '../../fakedata/customerfieldinfo.json'
 import {ITable} from '../../model/pieces'
+import { carDelayModel } from '../../../app/modules/reports/core/_models'
 
 type Props = {
   title: string
   description?: string
   columns?: ITable[]
+  delay?: boolean
+  delayData?: carDelayModel[] 
+  loading?: boolean
 }
 
-const TablesWidget: React.FC<Props> = ({title, description, columns}) => {
+const TablesWidget: React.FC<Props> = ({title, loading, description, columns, delay, delayData}) => {
   return (
     <div className={`card`}>
       {/* begin::Header */}
@@ -137,97 +141,65 @@ const TablesWidget: React.FC<Props> = ({title, description, columns}) => {
                     {i.name}
                   </th>
                 ))}
-
-                {/* <th className='ps-4 min-w-300px rounded-start'>{}</th> */}
-                {/* <th className='min-w-125px'>{column.nationalcode}</th>
-                <th className='min-w-125px'>{column.province}</th>
-                <th className='min-w-200px'>{column.city}</th>
-                <th className='min-w-150px'>{column.mobile}</th>
-                <th className='min-w-150px'>{column.address}</th> */}
               </tr>
             </thead>
             {/* end::Table head */}
             {/* begin::Table body */}
             <tbody>
-              <tr>
-                <td>
-                  <div className='d-flex align-items-center'>
-                    <div className='symbol symbol-50px me-5'>
-                      <span className='symbol-label bg-light'>
-                        <img
-                          src={toAbsoluteUrl('/media/svg/avatars/001-boy.svg')}
-                          className='h-75 align-self-end'
-                          alt=''
-                        />
-                      </span>
-                    </div>
-                    <div className='d-flex justify-content-start flex-column'>
-                      <a href='#' className='text-dark fw-bold text-hover-primary fs-6 mb-1'>
-                        Brad Simmons
-                      </a>
-                      <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                        HTML, JS, ReactJS
-                      </span>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
-                    $8,000,000
-                  </a>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>Pending</span>
-                </td>
-                <td>
-                  <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
-                    $5,400
-                  </a>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>Paid</span>
-                </td>
-                <td>
-                  <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
-                    Intertico
-                  </a>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                    Web, UI/UX Design
-                  </span>
-                </td>
-                <td>
-                  <div className='rating'>
-                    <div className='rating-label me-2 checked'>
-                      <i className='bi bi-star-fill fs-5'></i>
-                    </div>
-                    <div className='rating-label me-2 checked'>
-                      <i className='bi bi-star-fill fs-5'></i>
-                    </div>
-                    <div className='rating-label me-2 checked'>
-                      <i className='bi bi-star-fill fs-5'></i>
-                    </div>
-                    <div className='rating-label me-2 checked'>
-                      <i className='bi bi-star-fill fs-5'></i>
-                    </div>
-                    <div className='rating-label me-2 checked'>
-                      <i className='bi bi-star-fill fs-5'></i>
-                    </div>
-                  </div>
-                  <span className='text-muted fw-semibold text-muted d-block fs-7 mt-1'>
-                    Best Rated
-                  </span>
-                </td>
-                <td className='text-end'>
-                  <a
-                    href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm me-2 px-4'
-                  >
-                    View
-                  </a>
-                  <a
-                    href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
+              {delay ? (
+                delayData?.map((item: any) => {
+                  return <tr>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.billlandingid}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.prod_no}
+                    </a>
+                    {/* <span className='text-muted fw-semibold text-muted d-block fs-7'>Paid</span> */}
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.dealerName}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.driveR_NAME}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.originDesc}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.destinationDesc}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.contractorDlvrDate}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.intervalTimeLong}
+                    </a>
+                  </td>
+                  <td>
+                    <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6 mb-1'>
+                      {item?.transferTimeLong_str}
+                    </a>
+                  </td>
+                  
+                </tr>
+                })
+                
+              ) : null}
             </tbody>
             {/* end::Table body */}
           </table>

@@ -35,7 +35,7 @@ const Input = (props: any) => {
           <input
             {...props.getFieldProps(props.name)}
             className={clsx(
-              'form-control bg-transparent text-center font-VazirBold text-2xl h-14',
+              'form-control bg-transparent text-center font-VazirBold text-2xl h-12',
               {
                 'is-invalid': props.touched && props.errors,
               },
@@ -48,7 +48,7 @@ const Input = (props: any) => {
             autoComplete='off'
           />
           {props.touched && props.errors && (
-            <div className='fv-plugins-message-container'>
+            <div className='fv-plugins-message-container pt-4'>
               <span role='alert'>{props.errors}</span>
             </div>
           )}

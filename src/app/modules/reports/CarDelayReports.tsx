@@ -5,6 +5,7 @@ import {Card5} from '../../../_cloner/partials/content/cards/Card5'
 import {TablesWidget} from '../../../_cloner/helpers/components/TablesWidget'
 import CardDelayColumns from '../../../_cloner/fakedata/cardelarcolumns.json'
 import { useDelayRequest} from './core/_hooks'
+import ActionButton from '../../../_cloner/helpers/components/Modules/ActionButton'
 
 const CarDelayReports = () => {
 
@@ -16,7 +17,7 @@ const CarDelayReports = () => {
     productNo: '',
   }
 
-  const { mutate, data: carDelayData } = useDelayRequest();
+  const { mutate, data: carDelayData, isLoading } = useDelayRequest();
 
   // 111060557
 
@@ -45,7 +46,7 @@ const CarDelayReports = () => {
       title='گزارش تاخیر زمان تحویل خودرو به نمایندگی توسط پیمانکار'
       image='/media/svg/brand-logos/aven.svg'
     >
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className='grid grid-cols-2'>
         <section className='w-50'>
           <Input
             type='number'
@@ -56,9 +57,10 @@ const CarDelayReports = () => {
             name={'productNo'}
             title='شماره ساخت'
           ></Input>
+          <ActionButton loading={isLoading} title='جستجو' />
         </section>
       </form>
-      <TablesWidget columns={CardDelayColumns} title='نتیجه گزارش' />
+      <TablesWidget loading={isLoading} columns={CardDelayColumns} delayData={carDelayData} delay={true} title='نتیجه گزارش' />
     </Card5>
   )
 }
