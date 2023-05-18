@@ -1,17 +1,15 @@
-import {useQuery, useMutation, QueryClient} from 'react-query'
+import {useQuery, useMutation, UseMutationResult} from 'react-query'
 import * as api from './_requests'
 
-const queryCache = new QueryClient()
 
 const useCarDelayData = () => {
   return useQuery('carDelayData')
 }
 
-const CarDelayRequest = useMutation(api.getCarDelayData, {
-        onSuccess: () => {
-        //   const data = queryCache.getQueryData('carDelayData')
-          queryCache.setQueryData('carDelayData', "asdadad")
-        },
-      })
+const useDelayRequest = (): UseMutationResult<any, unknown, any, unknown> => {
+    return useMutation((formData:any) => {
+        return api.getCarDelayData(formData)
+    })
+}
 
-export {useCarDelayData, CarDelayRequest}
+export {useCarDelayData, useDelayRequest}
