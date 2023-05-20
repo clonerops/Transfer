@@ -13,3 +13,8 @@ export interface carDelayModel {
     transferTimeLong: string
     transferTimeLong_str: string
 }
+
+export interface CarStatusRequest {
+    productNo: number
+    chassisNo: string
+}

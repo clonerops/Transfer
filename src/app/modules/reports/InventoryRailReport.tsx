@@ -6,8 +6,8 @@ import ActionButton from '../../../_cloner/helpers/components/Modules/ActionButt
 import MainGrid from '../../../_cloner/helpers/components/MainGrid'
 import SelectOption from '../../../_cloner/helpers/components/Modules/SelectOption'
 import {useParkings} from '../../../_cloner/hooks/_hooks'
-import { InventoryRails } from '../../../_cloner/helpers/grid-value/inventory-rails'
-import { DownloadExcelFile } from '../../../_cloner/helpers/downloadExcel'
+import {InventoryRails} from '../../../_cloner/helpers/grid-value/inventory-rails'
+import {DownloadExcelFile} from '../../../_cloner/helpers/downloadExcel'
 
 const InventoryRailReport = () => {
   const validatioSchema = Yup.object().shape({
@@ -20,12 +20,11 @@ const InventoryRailReport = () => {
 
   const {data: parkings} = useParkings()
   const filterRailParkings = parkings?.result.filter((item: any) => item.logistic === 9)
-  
+
   const {mutate, data: inventoryData, isLoading} = useInventoryRequest()
 
   // const outputFilename = `LotteryValidApplicants${Date.now()}.csv`
   // DownloadExcelFile(data, outputFilename)
-
 
   const formik = useFormik({
     initialValues,
@@ -55,9 +54,7 @@ const InventoryRailReport = () => {
             name={'parkingNo'}
             title='پارکینگ ها'
           >
-            <option value='Active'>
-              انتخاب کنید...
-            </option>
+            <option value='Active'>انتخاب کنید...</option>
             {filterRailParkings?.map((item: any) => {
               return <option value={item.loC_CODE}>{item.loC_NAME}</option>
             })}
@@ -71,8 +68,11 @@ const InventoryRailReport = () => {
       {/* <section>
         <button onClick={}>خروجی اکسل</button>
       </section> */}
-      <MainGrid data={inventoryData} columnDefs={InventoryRails} />
-    </Card5>
+      <section className='mt-8'>
+        <span className='font-VazirBold text-xl py-8'>نتیجه گزارش</span>
+        <MainGrid data={inventoryData} columnDefs={InventoryRails} />
+      </section>
+    </Card5>  
   )
 }
 

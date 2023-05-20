@@ -9,6 +9,8 @@ import CustomerCallRegistration from '../pages/dashboard/CustomerCallRegistratio
 import ConnectToCallCenter from '../pages/dashboard/ConnectToCallCenter'
 import CarDelayReport from '../modules/reports/CarDelayReport'
 import InventoryRailReport from '../modules/reports/InventoryRailReport'
+import CarStatusReport from '../modules/reports/CarStatusReport'
+import DriverListReport from '../modules/reports/DriverListReport'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -22,8 +24,10 @@ const PrivateRoutes = () => {
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
         {/* Report Modules */}
-        <Route path='dashboard/report/carDelay' element={<CarDelayReport />} />
+        <Route path='dashboard/report/car-delay' element={<CarDelayReport />} />
         <Route path='dashboard/report/inventory-rail' element={<InventoryRailReport />} />
+        <Route path='dashboard/report/car-status' element={<CarStatusReport />} />
+        <Route path='dashboard/report/driver-list' element={<DriverListReport />} />
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
         {/* Lazy Modules */}
