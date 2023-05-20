@@ -116,7 +116,7 @@ const LandingStatusReport = () => {
             title='رانندگان'
           >
             <option value='Active'>انتخاب کنید...</option>
-            {drivers?.result?.map((item: any) => {
+            {drivers?.map((item: any) => {
               return <option value={item.driverID}>{item.driverName}</option>
             })}
           </SelectOption>
@@ -157,7 +157,7 @@ const LandingStatusReport = () => {
             title='وضعیت'
           >
             <option value='Active'>انتخاب کنید...</option>
-            {statusId?.map((item: any) => {
+            {shippingType?.map((item: any) => {
               return <option value={item.id}>{item.description}</option>
             })}
           </SelectOption>
