@@ -1,5 +1,5 @@
 import { dashboardHttp } from "../../../../_cloner/helpers/apiConfig"
-import { CarStatusRequest } from "./_models"
+import { BillandingChart, CarChart, CarStatusRequest } from "./_models"
 
 const getCarDelayData = async (prodNo: any) => {
     const { data } = await dashboardHttp.get("/BillLandingReport/Get", {
@@ -16,7 +16,6 @@ const getInventoryRailData = async (parkingId: number) => {
 }
 
 const getCarStatusData = async (formData: CarStatusRequest) => {
-    console.log("formDataformData", formData)
     const { data } = await dashboardHttp.get('/BillLandingReport/BLandCarStatusRep', {
         headers: {
             ProdNo: formData.productNo,
@@ -27,8 +26,31 @@ const getCarStatusData = async (formData: CarStatusRequest) => {
 
 }
 
+const getBillandigChartRequest = async (formData: BillandingChart) => {
+    const { data } = await dashboardHttp.get('/BillLandingReport/GetIssuedBLandsStatRep', {
+        headers: {
+            fromDate: formData.fromDate === "Invalid date" ? "" : formData.fromDate,
+            toDate: formData.toDate === "Invalid date" ? "" : formData.toDate,
+            contr_id: formData.contr_id
+        }
+    })
+    return data
+}
+const getCarChartRequest = async (formData: CarChart) => {
+    const { data } = await dashboardHttp.get('/BillLandingReport/GetIssuedBLandCarsStatRep', {
+        headers: {
+            fromDate: formData.fromDate === "Invalid date" ? "" : formData.fromDate,
+            toDate: formData.toDate === "Invalid date" ? "" : formData.toDate,
+            contr_id: formData.contr_id
+        }
+    })
+    return data
+}
+
 export {
     getCarDelayData,
     getInventoryRailData,
-    getCarStatusData
+    getCarStatusData,
+    getBillandigChartRequest,
+    getCarChartRequest
 }

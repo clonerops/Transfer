@@ -18,3 +18,14 @@ export interface CarStatusRequest {
     productNo: number
     chassisNo: string
 }
+
+export interface BillandingChart {
+    fromDate: string
+    toDate: string
+    contr_id: number
+} 
+export interface CarChart {
+    fromDate: string
+    toDate: string
+    contr_id: number
+} 
