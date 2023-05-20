@@ -14,6 +14,7 @@ import DriverListReport from '../modules/reports/DriverListReport'
 // import Billlandings from '../modules/billlandingManagment/Billlandings'
 import BillandingChartReport from '../modules/reports/BillandingChartReport'
 import CarChartReport from '../modules/reports/CarChartReport'
+import LandingStatusReport from '../modules/reports/LandingStatusReport'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -33,6 +34,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard/report/driver-list' element={<DriverListReport />} />
         <Route path='dashboard/report/billanding-chart' element={<BillandingChartReport />} />
         <Route path='dashboard/report/car-chart' element={<CarChartReport />} />
+        <Route path='dashboard/report/landing-status' element={<LandingStatusReport />} />
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
         {/* Lazy Modules */}

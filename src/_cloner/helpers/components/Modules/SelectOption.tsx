@@ -60,6 +60,7 @@ const SelectOption = (props: any) => {
       <select
         className={`form-select form-select-sm form-select-white border border-gray-400 p-2 ${props.width}`}
         {...props.getFieldProps(props.name)}
+        multiple={props.multiple}
         // name={props.name}
         // defaultValue='Active'
       >
