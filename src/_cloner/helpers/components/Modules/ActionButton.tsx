@@ -1,6 +1,4 @@
 import {FC} from 'react'
-import { Spinner } from 'react-bootstrap'
-
 interface IProps {
   title: string
   loading?: boolean
@@ -13,12 +11,19 @@ const ActionButton: FC<IProps> = ({title, loading}) => {
     // </button>
     <section className='flex items-center p-1 py-2'>
       <label className='font-IRANSans text-md inline-block w-[150px] pl-2 text-left' />
-      <input
+      <button
         type='submit'
         disabled={loading}
-        value={loading ? "در حال پردازش ..." : title}
         className='font-IRANSans float-left m-0 inline-block w-[14rem] rounded-md border border-gray-400 bg-indigo-500 p-1 text-lg text-white outline-none'
-      />
+      >
+        {!loading && <span className='indicator-label'>ادامه</span>}
+        {loading && (
+          <span className='indicator-progress' style={{display: 'block'}}>
+            درحال پردازش...
+            <span className='spinner-border spinner-border-sm ms-2 align-middle'></span>
+          </span>
+        )}
+      </button>
     </section>
   )
 }
