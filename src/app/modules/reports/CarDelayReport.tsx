@@ -7,7 +7,7 @@ import ActionButton from '../../../_cloner/helpers/components/Modules/ActionButt
 import MainGrid from '../../../_cloner/helpers/components/MainGrid'
 import { CarDelayGridValue } from '../../../_cloner/helpers/grid-value/car-delay'
 
-const CarDelayReports = () => {
+const CarDelayReport = () => {
 
   const validatioSchema = Yup.object().shape({
     productNo: Yup.string().required('شماره ساخت اجباری می باشد'),
@@ -60,4 +60,4 @@ const CarDelayReports = () => {
   )
 }
 
-export default CarDelayReports
+export default CarDelayReport

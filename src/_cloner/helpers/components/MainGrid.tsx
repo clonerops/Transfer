@@ -8,22 +8,28 @@ interface IProps {
 }
 
 const MainGrid: FC<IProps> = ({data, columnDefs}) => {
-  // const style = {
-  //   // height: data?.length > 4 ? 400 : 200,
-  //   // margin: '10px',
-  //   // boxShadow: '0px 6px 10px rgba( 0, 0, 0, 0.2 )',
-  // }
 
+  const output = document.getElementById("ag-4-start-page");
+  if (output) output.innerText = 'صفحه'
+  const output_Of = document.getElementById("ag-4-of-page");
+  if (output_Of) output_Of.innerText = 'از'
+  const output_to = document.getElementById("ag-4-to");
+  if (output_to) output_to.innerText = 'به'
+  const output_of1 = document.getElementById("ag-4-of");
+  if (output_of1) output_of1.innerText = 'از'
+  
   return (
     <div className='ag-theme-alpine'>
       <AgGridReact
         rowData={data}
-        className='font-Vazir text-white'
+        className='font-Vazir'
         columnDefs={columnDefs}
         enableRtl={true}
         overlayNoRowsTemplate='داده ای برای نمایش وجود ندارد'
         overlayLoadingTemplate='...در حال بارگزاری'
         domLayout='autoHeight'
+        paginationAutoPageSize={true}
+        pagination={true}
       />
     </div>
   )
