@@ -1,9 +1,8 @@
 import {useFormik} from 'formik'
 import {Card5} from '../../../_cloner/partials/content/cards/Card5'
-import {useLandingStatusRequest} from './core/_hooks'
+import { useTemporaryStatusRequest} from './core/_hooks'
 import ActionButton from '../../../_cloner/helpers/components/Modules/ActionButton'
 import MainGrid from '../../../_cloner/helpers/components/MainGrid'
-import Input from '../../../_cloner/helpers/components/Modules/Input'
 import SelectOption from '../../../_cloner/helpers/components/Modules/SelectOption'
 import {
   useBillandingStatus,
@@ -11,38 +10,35 @@ import {
   useDealers,
   useDrivers,
   useParkings,
-  useShippingTypes,
 } from '../../../_cloner/hooks/_hooks'
 import {useState} from 'react'
 import DatepickerComponent from '../../../_cloner/helpers/components/Modules/Datepicker'
 import {IDate} from '../../../_cloner/model/date'
 import {setDate} from '../../../_cloner/helpers/set-date'
 import moment from 'moment-jalaali'
-import { LandingStatus } from '../../../_cloner/helpers/grid-value/landing-status'
+import { TemporaryStatus } from '../../../_cloner/helpers/grid-value/temporary-status'
 
-const LandingStatusReport = () => {
+const TemporaryStatusReport = () => {
   const initialValues = {
-    BLandId: 0,
-    BlandSerialNo: '',
     contId: 0,
-    transType: 0,
     driverId: 0,
     originId: 0,
     destId: 0,
+    dealerId: 0
   }
 
   const {data: contractors} = useContractors()
-  const {data: shippingType} = useShippingTypes()
   const {data: drivers} = useDrivers()
   const {data: parkings} = useParkings()
   const {data: blStatus} = useBillandingStatus()
+  const {data: dealers} = useDealers()
 
   const [statusId, setStatusId] = useState([])
   const [fromDate, setFromDate] = useState<IDate>({value: setDate().toString()})
   const [toDate, setToDate] = useState<IDate>({value: new Date().toString()})
   const getStatusId = (selectedOption:any) => setStatusId(selectedOption)
 
-  const {mutate, data: landingStatus, isLoading} = useLandingStatusRequest()
+  const {mutate, data: temporaryStatus, isLoading} = useTemporaryStatusRequest()
 
   // const outputFilename = `LotteryValidApplicants${Date.now()}.csv`
   // DownloadExcelFile(data, outputFilename)
@@ -54,15 +50,13 @@ const LandingStatusReport = () => {
       try {
         mutate(
           {
-            BLandId: values.BLandId,
-            BlandSerialNo: values.BlandSerialNo,
             fromDate: moment(fromDate.value).format('jYYYY/jMM/jDD'),
             toDate: moment(toDate.value).format('jYYYY/jMM/jDD'),
             contId: values.contId,
-            transType: values.transType,
             driverId: values.driverId,
             originId: values.originId,
             destId: values.destId,
+            recDealerId: values.dealerId,
             StatusId: statusId?.map((item: any) => item.value)
           },
           {
@@ -78,30 +72,8 @@ const LandingStatusReport = () => {
   })
 
   return (
-    <Card5 title='گزارش حواله های صادر شده' image='/media/svg/brand-logos/aven.svg'>
+    <Card5 title='گزارش خودروهای بارنامه شده' image='/media/svg/brand-logos/aven.svg'>
       <form onSubmit={formik.handleSubmit} className=''>
-        <section className='grid grid-cols-2'>
-          <div className='flex w-full flex-row gap-16'>
-            <Input
-              type='number'
-              search={true}
-              getFieldProps={formik.getFieldProps}
-              touched={formik.touched.BLandId}
-              errors={formik.errors.BLandId}
-              name={'BLandId'}
-              title='شماره حواله'
-            ></Input>
-            <Input
-              type='text'
-              search={true}
-              getFieldProps={formik.getFieldProps}
-              touched={formik.touched.BlandSerialNo}
-              errors={formik.errors.BlandSerialNo}
-              name={'BlandSerialNo'}
-              title='شماره سریال'
-            ></Input>
-          </div>
-        </section>
         <section className='grid grid-cols-3'>
           <SelectOption
             getFieldProps={formik.getFieldProps}
@@ -118,19 +90,6 @@ const LandingStatusReport = () => {
 
           <SelectOption
             getFieldProps={formik.getFieldProps}
-            touched={formik.touched.transType}
-            errors={formik.errors.transType}
-            name={'transType'}
-            title='نوع حمل'
-          >
-            <option value=''>انتخاب کنید...</option>
-            {shippingType?.map((item: any) => {
-              return <option value={item.id}>{item.description}</option>
-            })}
-          </SelectOption>
-
-          <SelectOption
-            getFieldProps={formik.getFieldProps}
             touched={formik.touched.driverId}
             errors={formik.errors.driverId}
             name={'driverId'}
@@ -139,6 +98,18 @@ const LandingStatusReport = () => {
             <option value=''>انتخاب کنید...</option>
             {drivers?.map((item: any) => {
               return <option value={item.driverID}>{item.driverName}</option>
+            })}
+          </SelectOption>
+          <SelectOption
+            getFieldProps={formik.getFieldProps}
+            touched={formik.touched.dealerId}
+            errors={formik.errors.dealerId}
+            name={'dealerId'}
+            title='نمایندگی'
+          >
+            <option value=''>انتخاب کنید...</option>
+            {dealers?.map((item: any) => {
+              return <option value={item.dlR_NO}>{item.dlR_NAME}</option>
             })}
           </SelectOption>
         </section>
@@ -168,6 +139,7 @@ const LandingStatusReport = () => {
               return <option value={item.loC_CODE}>{item.loC_NAME}</option>
             })}
           </SelectOption>
+          
           <SelectOption
             isMulti={true}
             onChange={getStatusId}
@@ -203,10 +175,10 @@ const LandingStatusReport = () => {
       </form>
       <section className='mt-8'>
         <span className='py-8 font-VazirBold text-xl'>نتیجه گزارش</span>
-        <MainGrid data={landingStatus} columnDefs={LandingStatus} />
+        <MainGrid data={temporaryStatus} columnDefs={TemporaryStatus} />
       </section>
     </Card5>
   )
 }
 
-export default LandingStatusReport
+export default TemporaryStatusReport

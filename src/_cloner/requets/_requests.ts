@@ -41,6 +41,11 @@ const getCity = async (id: number) => {
     return data
 }
 
+const getBillandingStatus = async () => {
+    const { data } = await dashboardHttp.get('/BillLanding/GetBLandStatus')
+    return data
+}
+
 
 export {
     getParkings,
@@ -50,5 +55,6 @@ export {
     getDelaers,
     getPlateList,
     getProvince,
-    getCity
+    getCity,
+    getBillandingStatus
 }

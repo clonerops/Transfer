@@ -32,6 +32,10 @@ const useProvince = () => {
 const useCity = (id: number) => {
     return useQuery(['cities', id], () => api.getCity(id))
 }
+
+const useBillandingStatus = () => {
+    return useQuery('BlStatus', api.getBillandingStatus)
+}
  
 export { 
     useParkings,
@@ -41,5 +45,6 @@ export {
     useDealers,
     usePlateList,
     useProvince,
-    useCity
+    useCity,
+    useBillandingStatus
 }

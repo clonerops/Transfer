@@ -52956,3 +52956,43 @@ html:not([data-theme=dark]) {
     color: #ffffff !important;
   }
 }
+
+
+
+.multiple-select {
+  display: inline-block;
+  position: relative;
+}
+
+.multiple-select summary {
+  padding: 5px 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.multiple-select-dropdown {
+  position: absolute;
+  margin-top: 2px;
+  min-width: 100%;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.multiple-select label {
+  margin: 0;
+  display: block;
+}
+
+.multiple-select label > input + .content {
+  padding: 5px 10px;
+  display: block;
+  cursor: pointer;
+}
+
+.multiple-select label + label {
+  border-top: 1px solid #bbb;
+}
+
+.multiple-select label > input:checked + .content {
+  background-color: #bbb;
+}

@@ -1,5 +1,5 @@
 import { dashboardHttp } from "../../../../_cloner/helpers/apiConfig"
-import { BillandingChart, CarChart, CarStatusRequest } from "./_models"
+import { BillandingChart, CarChart, CarStatusRequest, LandigStatus, TemporaryStatus } from "./_models"
 
 const getCarDelayData = async (prodNo: any) => {
     const { data } = await dashboardHttp.get("/BillLandingReport/Get", {
@@ -47,10 +47,47 @@ const getCarChartRequest = async (formData: CarChart) => {
     return data
 }
 
+const getLandingStatus = async (formData: LandigStatus) => {    
+    const { data } = await dashboardHttp.get('/BillLandingReport/GetIssuedBLandsRep', {
+        headers: {
+            BLandId: formData.BLandId,
+            BlandSerialNo: formData.BlandSerialNo,
+            fromDate: formData.fromDate === undefined ? "" : formData.fromDate,
+            toDate: formData.toDate === undefined ? "" : formData.toDate,
+            contId: formData.contId,
+            transType: formData.transType,
+            driverId: formData.driverId,
+            originId: formData.originId,
+            destId: formData.destId,
+            StatusId: formData.StatusId,
+        }
+    })
+    return data
+ 
+}
+const getTemporaryStatus = async (formData: TemporaryStatus) => {    
+    const { data } = await dashboardHttp.get('/BillLandingReport/GetBLandIssuedCars', {
+        headers: {
+            fromDate: formData.fromDate === undefined ? "" : formData.fromDate,
+            toDate: formData.toDate === undefined ? "" : formData.toDate,
+            contId: formData.contId,
+            driverId: formData.driverId,
+            recDealerId: formData.recDealerId,
+            originId: formData.originId,
+            destId: formData.destId,
+            Status: formData.StatusId,
+        }
+    })
+    return data
+ 
+}
+
 export {
     getCarDelayData,
     getInventoryRailData,
     getCarStatusData,
     getBillandigChartRequest,
-    getCarChartRequest
+    getCarChartRequest,
+    getLandingStatus,
+    getTemporaryStatus
 }

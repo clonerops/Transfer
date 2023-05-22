@@ -1,6 +1,6 @@
 import {useMutation, UseMutationResult} from 'react-query'
 import * as api from './_requests'
-import {BillandingChart, CarChart, CarStatusRequest} from './_models'
+import {BillandingChart, CarChart, CarStatusRequest, LandigStatus, TemporaryStatus} from './_models'
 
 const useDelayRequest = (): UseMutationResult<any, unknown, any, unknown> => {
   return useMutation((formData: any) => {
@@ -29,8 +29,18 @@ const useBillandingChartRequest = (): UseMutationResult<any, unknown, any, unkno
 
 const useCarChartRequest = (): UseMutationResult<any, unknown, any, unknown> => {
   return useMutation((formData: CarChart) => {
-    console.log('formData', formData)
     return api.getCarChartRequest(formData)
+  })
+}
+const useLandingStatusRequest = (): UseMutationResult<any, unknown, any, unknown> => {
+  return useMutation((formData: LandigStatus) => {
+    return api.getLandingStatus(formData)
+  })
+}
+const useTemporaryStatusRequest = (): UseMutationResult<any, unknown, any, unknown> => {
+  return useMutation((formData: TemporaryStatus) => {
+    console.log('formData', formData)
+    return api.getTemporaryStatus(formData)
   })
 }
 
@@ -40,4 +50,6 @@ export {
   useCarStatusRequest,
   useBillandingChartRequest,
   useCarChartRequest,
+  useLandingStatusRequest,
+  useTemporaryStatusRequest
 }
