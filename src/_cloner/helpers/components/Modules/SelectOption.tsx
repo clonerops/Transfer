@@ -7,7 +7,7 @@ const SelectOption = (props: any) => {
       borderColor: '#B5B5C3',
       minHeight: '34px',
       height: '34px',
-      borderRadius: '6px'
+      borderRadius: '6px',
     }),
   }
 
@@ -31,29 +31,55 @@ const SelectOption = (props: any) => {
         />
         {props.touched && props.errors && (
           <div className='fv-plugins-message-container'>
-            <div className='fv-help-block'>{props.errors}</div>
+            <div className='fv-help-block text-red-500'>{props.errors}</div>
+          </div>
+        )}
+      </div>
+    </>
+  ) : props.isCreate ? (
+    <>
+      <div className='fv-row mb-4 flex flex-col items-start p-1 py-2'>
+        <label className='form-label fw-bolder text-dark'>{props.title}</label>
+        <select
+          className={`form-select form-select-sm form-select-white border border-gray-400 p-2 ${props.width}`}
+          {...props.getFieldProps(props.name)}
+          multiple={props.multiple}
+          defaultValue={props.defaultValue}
+          onChange={props.onChange}
+          value={props.value}
+          id={props.id}
+          disabled={props.disabled}
+        >
+          {props.children}
+        </select>
+        {props.touched && props.errors && (
+          <div className='fv-plugins-message-container'>
+            <div className='fv-help-block text-red-500'>{props.errors}</div>
           </div>
         )}
       </div>
     </>
   ) : (
-    <div className='flex flex-col items-start p-1 py-2'>
-      <label className='font-IRANSans text-md inline-block p-2 text-left font-VazirBold'>
-        {props.title}:
-      </label>
-      <select
-        className={`form-select form-select-sm form-select-white border border-gray-400 p-2 ${props.width}`}
-        {...props.getFieldProps(props.name)}
-        multiple={props.multiple}
-      >
-        {props.children}
-      </select>
-      {props.touched && props.errors && (
-        <div className='fv-plugins-message-container'>
-          <div className='fv-help-block'>{props.errors}</div>
-        </div>
-      )}
-    </div>
+    <>
+      <div className='fv-row mb-4 flex flex-col items-start p-1 py-2'>
+        <label className='form-label fw-bolder text-dark'>{props.title}</label>
+        <select
+          className={`form-select form-select-sm form-select-white border border-gray-400 p-2 ${props.width}`}
+          {...props.getFieldProps(props.name)}
+          multiple={props.multiple}
+          defaultValue={props.defaultValue}
+          id={props.id}
+          disabled={props.disabled}
+        >
+          {props.children}
+        </select>
+        {props.touched && props.errors && (
+          <div className='fv-plugins-message-container'>
+            <div className='fv-help-block text-red-500'>{props.errors}</div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

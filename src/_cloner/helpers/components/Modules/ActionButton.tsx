@@ -16,7 +16,7 @@ const ActionButton: FC<IProps> = ({title, loading}) => {
         disabled={loading}
         className='font-IRANSans float-left m-0 inline-block w-[14rem] rounded-md border border-gray-400 bg-indigo-500 p-1 text-lg text-white outline-none'
       >
-        {!loading && <span className='indicator-label'>جستجو</span>}
+        {!loading && <span className='indicator-label'>{title}</span>}
         {loading && (
           <span className='indicator-progress' style={{display: 'block'}}>
             درحال پردازش...

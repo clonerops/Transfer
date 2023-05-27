@@ -1,0 +1,6 @@
+{
+    "singleormarried": [
+        {"id": 1, "value": "متاهل"},
+        {"id": 2, "value": "مجرد"}
+    ]
+}
