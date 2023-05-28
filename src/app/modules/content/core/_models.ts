@@ -9,3 +9,13 @@ export interface StaticLinkWithoutId {
     content: string
     description: string
 }
+
+export interface Faq {
+    id: number,
+    question: string
+    answer: string
+}
+export interface FaqWithoutId {
+    question: string
+    answer: string
+}

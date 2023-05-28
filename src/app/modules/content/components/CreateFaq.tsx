@@ -1,8 +1,7 @@
 import ActionButton from '../../../../_cloner/helpers/components/Modules/ActionButton'
 import Modal from '../../../../_cloner/helpers/Modal'
-import {StaticLinkWithoutId} from '../core/_models'
 import {useFormik} from 'formik'
-import {useCreateStaticLinks, useFetchStaticLinks} from '../core/_hooks'
+import {useCreateFaq, useFetchFaq} from '../core/_hooks'
 import {FC} from 'react'
 import Input from '../../../../_cloner/helpers/components/Modules/Input'
 
@@ -11,16 +10,15 @@ interface IProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CreateStaticLink: FC<IProps> = ({isOpen, setIsOpen}) => {
+const CreateFaq: FC<IProps> = ({isOpen, setIsOpen}) => {
   const closeModal = () => setIsOpen(false)
   const initialValues = {
-    name: '',
-    content: '',
-    description: '',
+    question: '',
+    answer: '',
   }
-  const {refetch} = useFetchStaticLinks()
+  const {refetch} = useFetchFaq()
 
-  const {mutate} = useCreateStaticLinks()
+  const {mutate} = useCreateFaq()
 
   const formik = useFormik({
     initialValues,
@@ -29,9 +27,8 @@ const CreateStaticLink: FC<IProps> = ({isOpen, setIsOpen}) => {
       try {
         mutate(
           {
-            name: values.name,
-            content: values.content,
-            description: values.description,
+            question: values.question,
+            answer: values.answer,
           },
           {
             onSuccess: () => {
@@ -52,34 +49,25 @@ const CreateStaticLink: FC<IProps> = ({isOpen, setIsOpen}) => {
         <form onSubmit={formik.handleSubmit}>
           <Input
             getFieldProps={formik.getFieldProps}
-            touched={formik.touched.name}
-            errors={formik.errors.name}
-            value={formik.values.name}
+            touched={formik.touched.question}
+            errors={formik.errors.question}
+            value={formik.values.question}
             onChange={formik.handleChange}
-            name='name'
+            name='question'
             type='text'
-            title='نام'
+            title='پرسش'
           />
           <Input
             getFieldProps={formik.getFieldProps}
-            touched={formik.touched.content}
-            errors={formik.errors.content}
-            value={formik.values.content}
+            touched={formik.touched.answer}
+            errors={formik.errors.answer}
+            value={formik.values.answer}
             onChange={formik.handleChange}
-            name='content'
+            name='answer'
             type='text'
-            title='آدرس'
+            title='پاسخ'
           />
-          <Input
-            getFieldProps={formik.getFieldProps}
-            touched={formik.touched.description}
-            errors={formik.errors.description}
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            name='description'
-            type='text'
-            title='توضیحات'
-          />
+
           <ActionButton title='ایجاد' />
         </form>
       </div>
@@ -87,4 +75,4 @@ const CreateStaticLink: FC<IProps> = ({isOpen, setIsOpen}) => {
   )
 }
 
-export default CreateStaticLink
+export default CreateFaq

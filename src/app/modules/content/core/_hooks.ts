@@ -1,7 +1,8 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import * as api from './_requests'
-import {StaticLink, StaticLinkWithoutId} from './_models'
+import {Faq, FaqWithoutId, StaticLink, StaticLinkWithoutId} from './_models'
 
+// Static Links
 const useFetchStaticLinks = () => {
   return useQuery(['staticlinks'], api.getStaticLinks)
 }
@@ -36,4 +37,42 @@ const useDeleteStaticLinks = () => {
   })
 }
 
-export {useFetchStaticLinks, useCreateStaticLinks, useEditStaticLinks, useDeleteStaticLinks}
+// Faq
+
+const useFetchFaq = () => {
+  return useQuery(['faq'], api.getFaq)
+}
+
+const useCreateFaq = () => {
+  return useMutation((formData: FaqWithoutId) => {
+    return api.createFaq(formData)
+  })
+}
+
+const useEditFaq = () => {
+  return useMutation((formData: Faq) => {
+    return api.editFaq(formData.id, formData)
+  })
+}
+
+const useDeleteFaq = () => {
+  const queryClient = useQueryClient()
+  return useMutation(api.deleteFaq, {
+    onSuccess: (_, id) => {
+      const faq: any = queryClient.getQueryData(['faq'])
+      const data = faq?.filter((item: any) => item.id !== id)
+      queryClient.setQueryData(['faq'], data)
+    },
+  })
+}
+
+export {
+  useFetchStaticLinks,
+  useCreateStaticLinks,
+  useEditStaticLinks,
+  useDeleteStaticLinks,
+  useFetchFaq,
+  useCreateFaq,
+  useEditFaq,
+  useDeleteFaq,
+}
