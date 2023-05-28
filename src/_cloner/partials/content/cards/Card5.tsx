@@ -57,7 +57,7 @@ const Card5: FC<Props> = ({
         </div>
       </div>
 
-      <div className='card-body d-flex flex-column px-9 pt-1 pb-4'>
+      <div className='card-body px-9 pt-1 pb-4'>
         {children}
       </div>
     </div>

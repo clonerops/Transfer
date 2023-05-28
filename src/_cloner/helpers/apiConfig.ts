@@ -9,7 +9,7 @@ export const http = axios.create({
 
 export const dashboardHttp = axios.create({
     baseURL: "https://transferapi.saipacorp.com/api",
-    headers: {'Authorization': 'Bearer '+ token}
+    headers: {'Authorization': 'Bearer '+ token, 'Content-Type': 'application/json'}
 })
 
 

@@ -2,8 +2,7 @@ import {createRoot} from 'react-dom/client'
 // Axios
 import axios from 'axios'
 import {Chart, registerables} from 'chart.js'
-import {QueryClient, QueryClientProvider} from 'react-query'
-// Apps
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'// Apps
 import {MetronicI18nProvider} from './_cloner/i18n/Metronici18n'
 /**
  * TIP: Replace this style import with rtl styles to enable rtl mode
@@ -20,6 +19,8 @@ import {AuthProvider, setupAxios} from './app/modules/auth'
 import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
 import {persistor, store} from './_cloner/store/store'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 /**
  * Creates `axios-mock-adapter` instance for provided `axios` instance, add
  * basic Metronic mocks and returns it.
@@ -36,7 +37,6 @@ Chart.register(...registerables)
 
 const container = document.getElementById('root')
 if (container) {
-
   const queryClient = new QueryClient()
 
   createRoot(container).render(
@@ -50,6 +50,7 @@ if (container) {
           </AuthProvider>
         </Provider>
       </MetronicI18nProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
 }

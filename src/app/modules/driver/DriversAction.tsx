@@ -49,8 +49,6 @@ const DriversAction = () => {
     setNational(event.target.value);
   };
 
-console.log("informations",informations)
-
   return (
     <Card5 title='دریافت و ثبت مشخصات راننده جدید' image='/media/svg/brand-logos/aven.svg'>
       <form onSubmit={formik.handleSubmit} className='w-50'>

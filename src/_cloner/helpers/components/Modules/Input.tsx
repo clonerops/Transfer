@@ -80,7 +80,9 @@ const Input = (props: any) => {
           />
           {props.touched && props.errors && (
             <div className='fv-plugins-message-container'>
-              <span role='alert' className='text-red-500'>{props.errors}</span>
+              <span role='alert' className='text-red-500'>
+                {props.errors}
+              </span>
             </div>
           )}
         </div>
