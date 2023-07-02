@@ -3,7 +3,6 @@ import {createRoot} from 'react-dom/client'
 import axios from 'axios'
 import {Chart, registerables} from 'chart.js'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'// Apps
-import {MetronicI18nProvider} from './_cloner/i18n/Metronici18n'
 /**
  * TIP: Replace this style import with rtl styles to enable rtl mode
  *
@@ -41,7 +40,6 @@ if (container) {
 
   createRoot(container).render(
     <QueryClientProvider client={queryClient}>
-      <MetronicI18nProvider>
         <Provider store={store}>
           <AuthProvider>
             <PersistGate persistor={persistor}>
@@ -49,7 +47,6 @@ if (container) {
             </PersistGate>
           </AuthProvider>
         </Provider>
-      </MetronicI18nProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

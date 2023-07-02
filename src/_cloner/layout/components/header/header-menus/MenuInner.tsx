@@ -7,11 +7,11 @@ export function MenuInner() {
   // const intl = useIntl()
   return (
     <>
-      <MenuItem title='کارتابل' to='/dashboard' />
-      <MenuItem title='کارتابل گروهی' to='/dashboard' />
+      <MenuItem title='داشبورد' to='/dashboard' />
+      {/* <MenuItem title='کارتابل گروهی' to='/dashboard' />
       <MenuItem title='امکانات' to='/dashboard' />
       <MenuItem title='مرکز مشتریان' to='/dashboard' />
-      <MenuItem title='شرکت های زیر مجموعه' to='/dashboard' />
+      <MenuItem title='شرکت های زیر مجموعه' to='/dashboard' /> */}
     </>
   )
 }

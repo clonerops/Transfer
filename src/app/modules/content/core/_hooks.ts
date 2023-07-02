@@ -1,6 +1,6 @@
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import * as api from './_requests'
-import {Faq, FaqWithoutId, StaticLink, StaticLinkWithoutId} from './_models'
+import {Faq, FaqWithoutId, News, NewsWithoutId, StaticLink, StaticLinkWithoutId} from './_models'
 
 // Static Links
 const useFetchStaticLinks = () => {
@@ -65,6 +65,34 @@ const useDeleteFaq = () => {
     },
   })
 }
+// News
+
+const useFetchNews = () => {
+  return useQuery(['news'], api.getNews)
+}
+
+const useCreateNews = () => {
+  return useMutation((formData: NewsWithoutId) => {
+    return api.createNews(formData) 
+  })
+}
+
+const useEditNews = () => {
+  return useMutation((formData: News) => {
+    return api.editNews(formData.id, formData)
+  })
+}
+
+const useDeleteNews = () => {
+  const queryClient = useQueryClient()
+  return useMutation(api.deleteNews, {
+    onSuccess: (_, id) => {
+      const news: any = queryClient.getQueryData(['news'])
+      const data = news?.filter((item: any) => item.id !== id)
+      queryClient.setQueryData(['news'], data)
+    },
+  })
+}
 
 export {
   useFetchStaticLinks,
@@ -75,4 +103,8 @@ export {
   useCreateFaq,
   useEditFaq,
   useDeleteFaq,
+  useFetchNews,
+  useCreateNews,
+  useEditNews,
+  useDeleteNews,
 }

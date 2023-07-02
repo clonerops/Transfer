@@ -38,23 +38,6 @@ const Card5: FC<Props> = ({
             {title}
           </a>
         </div>
-
-        <div className='card-toolbar m-0'>
-          <button
-            type='button'
-            className='btn btn-clean btn-sm btn-icon btn-icon-primary btn-active-light-primary me-n3'
-            data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
-            <KTSVG
-              path='/media/icons/duotune/general/gen024.svg'
-              className='svg-icon-3 svg-icon-primary'
-            />
-          </button>
-
-          <Dropdown1 />
-        </div>
       </div>
 
       <div className='card-body px-9 pt-1 pb-4'>

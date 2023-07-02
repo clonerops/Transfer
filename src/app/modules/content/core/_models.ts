@@ -19,3 +19,21 @@ export interface FaqWithoutId {
     question: string
     answer: string
 }
+
+export interface News {
+    id: number,
+    Title: string
+    Content: string
+    STATUS: string
+    Type: string
+    UserId: number
+    Image: string
+}
+export interface NewsWithoutId {
+    Title: string
+    Content: string
+    STATUS: string
+    Type: string
+    UserId: number
+    Image: string
+}

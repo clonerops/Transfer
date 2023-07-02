@@ -19,6 +19,7 @@ import TemporaryStatusReport from '../modules/reports/TemporaryStatusReport'
 import DriversAction from '../modules/driver/DriversAction'
 import StaticLinksContent from '../modules/content/StaticLinksContent'
 import FaqContent from '../modules/content/FaqContent'
+import NewsContent from '../modules/content/NewsContent'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -44,6 +45,9 @@ const PrivateRoutes = () => {
         {/* content */}
         <Route path='dashboard/content/static-link' element={<StaticLinksContent />} />
         <Route path='dashboard/content/faq' element={<FaqContent />} />
+        <Route path='dashboard/content/news' element={<NewsContent />} />
+
+        
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
         {/* Lazy Modules */}
