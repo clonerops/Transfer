@@ -32,8 +32,8 @@ export interface News {
 export interface NewsWithoutId {
     Title: string
     Content: string
-    STATUS: string
-    Type: string
+    STATUS: number
+    Type: number
     UserId: number
     Image: string
 }

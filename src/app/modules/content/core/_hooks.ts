@@ -72,7 +72,7 @@ const useFetchNews = () => {
 }
 
 const useCreateNews = () => {
-  return useMutation((formData: NewsWithoutId) => {
+  return useMutation((formData: any) => {
     return api.createNews(formData) 
   })
 }

@@ -49,7 +49,7 @@ const getNews = async () => {
   return data
 }
 
-const createNews = async (formData: NewsWithoutId) => {
+const createNews = async (formData: any) => {
   const {data} = await dashboardHttp.post('/News', formData)
   return data
 }
