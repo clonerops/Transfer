@@ -28,6 +28,3 @@ export * from './modals/create-app-stepper/CreateAppModal'
 export * from './modals/select-location/SelectLocationModal'
 export * from './modals/invite-users/InviteUsers'
 export * from './modals/upgrade-plan/UpgradePlan'
-
-// chat
-export * from './chat/ChatInner'

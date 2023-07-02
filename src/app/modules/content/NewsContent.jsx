@@ -26,12 +26,12 @@ const NewsContent = () => {
   const openModal = (items) => {
     setItems({
       id: items.id,
-      Title: items.Title,
-      Content: items.Content,
-      STATUS: items.STATUS,
-      Type: items.Type,
-      UserId: items.UserId,
-      Image: items.Image,
+      Title: items.title,
+      Content: items.content,
+      STATUS: items.status,
+      Type: items.type,
+      UserId: items.userid,
+      Image: items.dataImage,
     })
     setIsOpen(true)
   }

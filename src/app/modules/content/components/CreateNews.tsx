@@ -5,20 +5,14 @@ import { useCreateNews, useFetchNews } from "../core/_hooks";
 import { FC, useState } from "react";
 import Input from "../../../../_cloner/helpers/components/Modules/Input";
 import SelectOption from "../../../../_cloner/helpers/components/Modules/SelectOption";
+import { onImageChange } from "../../../../_cloner/helpers/imageChangeFunction";
+import newsStatus from '../../../../_cloner/fakedata/newsStatus.json'
+import newsType from '../../../../_cloner/fakedata/newsType.json'
 
 interface IProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const isStatus = [
-    { id: 1, title: "انتشار" },
-    { id: 2, title: "عدم انتشار" },
-];
-const isType = [
-    { id: 1, title: "اخبار" },
-    { id: 2, title: "اطلاعیه" },
-];
 
 const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
     const [imageUpload, setImageUpload] = useState<any>(null);
@@ -35,19 +29,6 @@ const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
         Image: null,
     };
 
-    const onImageChange = (e: any) => {
-        if (
-            e.target.files[0].type !== "image/png" &&
-            e.target.files[0].type !== "image/jpg" &&
-            e.target.files[0].type !== "image/jpeg"
-        ) {
-            alert("شما نمی توانید فایلی غیر از تصویر آپلود نمایید!");
-        } else {
-            setImageUpload(URL.createObjectURL(e.target.files[0]));
-            setImageFile(e.target.files[0]);
-        }
-    };
-
     const { refetch } = useFetchNews();
 
     const { mutate } = useCreateNews();
@@ -57,7 +38,6 @@ const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
         enableReinitialize: true,
         onSubmit: async (values, { setStatus, setSubmitting, resetForm }) => {
             try {
-              console.log(values.STATUS)
               var bodyFormData = new FormData();
               bodyFormData.append('Image', imageFile);
               bodyFormData.append("Title", values.Title);
@@ -114,7 +94,7 @@ const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
                         title="وضعیت انتشار"
                     >
                         <option value="">انتخاب کنید...</option>
-                        {isStatus?.map((item: any) => {
+                        {newsStatus?.map((item: any) => {
                             return (
                                 <option value={item.id}>{item.title}</option>
                             );
@@ -129,7 +109,7 @@ const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
                         title="نوع خبر"
                     >
                         <option value="">انتخاب کنید...</option>
-                        {isType?.map((item: any) => {
+                        {newsType?.map((item: any) => {
                             return (
                                 <option value={item.id}>{item.title}</option>
                             );
@@ -145,7 +125,7 @@ const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
                             touched={formik.touched.Image}
                             errors={formik.errors.Image}
                             value={formik.values.Image}
-                            onChange={onImageChange}
+                            onChange={(e: any) => onImageChange(e, setImageUpload, setImageFile)}
                             file={true}
                             className="hidden"
                             id="imageUpload"
@@ -167,5 +147,4 @@ const CreateNews: FC<IProps> = ({ isOpen, setIsOpen }) => {
         </Modal>
     );
 };
-
 export default CreateNews;

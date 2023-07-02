@@ -78,8 +78,8 @@ const useCreateNews = () => {
 }
 
 const useEditNews = () => {
-  return useMutation((formData: News) => {
-    return api.editNews(formData.id, formData)
+  return useMutation((formData: any) => {
+    return api.editNews(formData)
   })
 }
 

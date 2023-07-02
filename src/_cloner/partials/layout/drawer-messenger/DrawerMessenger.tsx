@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {FC} from 'react'
 import {KTSVG} from '../../../helpers'
-import {ChatInner} from '../../chat/ChatInner'
 
 const DrawerMessenger: FC = () => (
   <div
@@ -49,7 +48,6 @@ const DrawerMessenger: FC = () => (
         </div>
       </div>
 
-      <ChatInner isDrawer={true} />
     </div>
   </div>
 )

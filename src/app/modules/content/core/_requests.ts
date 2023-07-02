@@ -59,8 +59,9 @@ const deleteNews = async (id: number) => {
   return data
 }
 
-const editNews = async (id: number, formData: News) => {
-  const {data} = await dashboardHttp.put(`/News/${id}`, formData)
+const editNews = async (formData: any) => {
+  let formObject = Object.fromEntries(formData.entries());
+  const {data} = await dashboardHttp.put(`/News/${formObject.id}`, formData)
   return data
 }
 export {

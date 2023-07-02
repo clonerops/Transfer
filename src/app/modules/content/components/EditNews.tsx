@@ -1,93 +1,151 @@
-import React, {FC} from 'react'
-import Modal from '../../../../_cloner/helpers/Modal'
-import {useFormik} from 'formik'
-import {useEditNews, useFetchNews} from '../core/_hooks'
-import {News} from '../core/_models'
-import Input from '../../../../_cloner/helpers/components/Modules/Input'
+import React, { FC, useState } from "react";
+import Modal from "../../../../_cloner/helpers/Modal";
+import { useFormik } from "formik";
+import { useEditNews, useFetchNews } from "../core/_hooks";
+import Input from "../../../../_cloner/helpers/components/Modules/Input";
+import SelectOption from "../../../../_cloner/helpers/components/Modules/SelectOption";
+import ActionButton from "../../../../_cloner/helpers/components/Modules/ActionButton";
+import { onImageChange } from "../../../../_cloner/helpers/imageChangeFunction";
+import newsStatus from '../../../../_cloner/fakedata/newsStatus.json'
+import newsType from '../../../../_cloner/fakedata/newsType.json'
 
 interface IProps {
-    isOpen: boolean
-    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-    items: News
+    isOpen: boolean;
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    items: any;
 }
 
-const EditNews:FC<IProps> = ({isOpen, setIsOpen, items}) => {
-  const closeModal = () => setIsOpen(false)
+const EditNews: FC<IProps> = ({ isOpen, setIsOpen, items }) => {
+    const closeModal = () => setIsOpen(false);
+    const [imageUpload, setImageUpload] = useState<any>(null);
+    const [imageFile, setImageFile] = useState<any>(null);
 
+    const { mutate } = useEditNews();
+    const { refetch } = useFetchNews();
 
-  const {mutate} = useEditNews()
-  const {refetch} = useFetchNews()
+    const formik = useFormik({
+        initialValues: items,
+        enableReinitialize: true,
+        onSubmit: async (values, { setStatus, setSubmitting }) => {
+            try {
+                var bodyFormData = new FormData();
+                bodyFormData.append("id", values.id);
+                bodyFormData.append(
+                    "Image",
+                    imageFile ? imageFile : values.Image
+                );
+                bodyFormData.append("Title", values.Title);
+                bodyFormData.append("Content", values.Content);
+                bodyFormData.append("STATUS", values.STATUS);
+                bodyFormData.append("Type", values.Type);
 
-  const formik = useFormik({
-    initialValues: items,
-    enableReinitialize: true,
-    onSubmit: async (values, {setStatus, setSubmitting}) => {
-      try {
-        mutate(
-          {
-            id: values.id,
-            Title: values.Title,
-            Content: values.Content,
-            STATUS: values.STATUS,
-            Type: values.Type,
-            Image: values.Image,
-            UserId: 0
-          },
-          {
-            onSuccess: () => {
-              refetch()
-              closeModal()
-            },
-          }
-        )
-      } catch (error) {
-        console.log(error)
-      }
-    },
-  })
-  return (
-    <Modal isOpen={isOpen} onClose={closeModal}>
-      <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
-        <form onSubmit={formik.handleSubmit}>
-          <Input
-            getFieldProps={formik.getFieldProps}
-            touched={formik.touched.id}
-            errors={formik.errors.id}
-            value={formik.values.id}
-            onChange={formik.handleChange}
-            name='id'
-            type='hidden'
-          />
-          <Input
-            getFieldProps={formik.getFieldProps}
-            touched={formik.touched.Title}
-            errors={formik.errors.Title}
-            value={formik.values.Title}
-            onChange={formik.handleChange}
-            name='Title'
-            type='text'
-            title='عنوان'
-          />
-          <Input
-            getFieldProps={formik.getFieldProps}
-            touched={formik.touched.Content}
-            errors={formik.errors.Content}
-            value={formik.values.Content}
-            onChange={formik.handleChange}
-            name='Content'
-            type='text'
-            title='موضوع'
-          />
-          <button
-            type='submit'
-            className='inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm'
-          >
-            ثبت
-          </button>
-        </form>
-      </div>
-    </Modal>
-  )
-}
+                mutate(bodyFormData, {
+                    onSuccess: () => {
+                        refetch();
+                        closeModal();
+                        setImageFile(null);
+                    },
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
+    return (
+        <Modal isOpen={isOpen} onClose={closeModal}>
+            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <form className="flex flex-col" onSubmit={formik.handleSubmit}>
+                    <Input
+                        getFieldProps={formik.getFieldProps}
+                        touched={formik.touched.id}
+                        errors={formik.errors.id}
+                        value={formik.values.id}
+                        onChange={formik.handleChange}
+                        name="id"
+                        type="hidden"
+                    />
+                    <Input
+                        getFieldProps={formik.getFieldProps}
+                        touched={formik.touched.Title}
+                        errors={formik.errors.Title}
+                        value={formik.values.Title}
+                        onChange={formik.handleChange}
+                        name="Title"
+                        type="text"
+                        title="عنوان"
+                    />
+                    <Input
+                        getFieldProps={formik.getFieldProps}
+                        touched={formik.touched.Content}
+                        errors={formik.errors.Content}
+                        value={formik.values.Content}
+                        onChange={formik.handleChange}
+                        name="Content"
+                        type="text"
+                        title="محتوا"
+                    />
+                    <SelectOption
+                        getFieldProps={formik.getFieldProps}
+                        touched={formik.touched.STATUS}
+                        errors={formik.errors.STATUS}
+                        defaultValue={formik.values.STATUS}
+                        name={"STATUS"}
+                        id={"STATUS"}
+                        title="وضعیت انتشار"
+                    >
+                        <option value="">انتخاب کنید...</option>
+                        {newsStatus?.map((item: any) => {
+                            return (
+                                <option value={item.id}>{item.title}</option>
+                            );
+                        })}
+                    </SelectOption>
+                    <SelectOption
+                        getFieldProps={formik.getFieldProps}
+                        touched={formik.touched.Type}
+                        errors={formik.errors.Type}
+                        defaultValue={formik.values.Type}
+                        name={"Type"}
+                        id={"Type"}
+                        title="نوع خبر"
+                    >
+                        <option value="">انتخاب کنید...</option>
+                        {newsType?.map((item: any) => {
+                            return (
+                                <option value={item.id}>{item.title}</option>
+                            );
+                        })}
+                    </SelectOption>
+                    <label
+                        htmlFor="imageUpload"
+                        className="btn btn-primary btn-block btn-outlined h-auto"
+                    >
+                        آپلود تصویر
+                        <Input
+                            getFieldProps={formik.getFieldProps}
+                            touched={formik.touched.Image}
+                            errors={formik.errors.Image}
+                            onChange={(e: any) => onImageChange(e, setImageUpload, setImageFile)}
+                            file={true}
+                            className="hidden"
+                            id="imageUpload"
+                            name="Image"
+                            type="file"
+                        />
+                    </label>
+                    <div className="flex items-center justify-center">
+                        <img
+                            className={`mt-4 block h-[100px] w-[180px] rounded-lg`}
+                            src={imageUpload ? imageUpload : `data:image/jpeg;base64,${formik.values.Image}`}
+                        />
+                    </div>
+                    <div className="mr-auto flex items-start justify-start">
+                        <ActionButton title="ویرایش" />
+                    </div>
+                </form>
+            </div>
+        </Modal>
+    );
+};
 
-export default EditNews
+export default EditNews;
