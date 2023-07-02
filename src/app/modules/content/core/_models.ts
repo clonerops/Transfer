@@ -37,3 +37,28 @@ export interface NewsWithoutId {
     UserId: number
     Image: string
 }
+
+export interface Ticket {
+    id: number,
+    ticketDesc: string
+    answerDesc: string
+    ticketStatus?: number
+    driverName?: string
+}
+export interface TicketWithoutId {
+    ticketDesc: string
+    answerDesc: string
+    ticketStatus: number
+    driverName?: string
+}
+
+export interface TicketSendData {
+    fromDate: string
+    toDate: string
+
+}
+export interface TicketAnswer {
+    id: number
+    answerDesc: string
+
+}
