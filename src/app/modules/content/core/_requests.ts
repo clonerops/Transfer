@@ -64,6 +64,28 @@ const editNews = async (formData: any) => {
   const {data} = await dashboardHttp.put(`/News/${formObject.id}`, formData)
   return data
 }
+
+// StaticContent
+const getStaticContent = async () => {
+  const {data} = await dashboardHttp.get('/StaticContent')
+  return data
+}
+
+const createStaticContent = async (formData: any) => {
+  const {data} = await dashboardHttp.post('/StaticContent', formData)
+  return data
+}
+
+const deleteStaticContent = async (id: number) => {
+  const {data} = await dashboardHttp.delete(`/StaticContent/${id}`)
+  return data
+}
+
+const editStaticContent = async (formData: any) => {
+  let formObject = Object.fromEntries(formData.entries());
+  const {data} = await dashboardHttp.put(`/StaticContent/${formObject.id}`, formData)
+  return data
+}
 export {
   getStaticLinks,
   createStaticLink,
@@ -77,4 +99,8 @@ export {
   createNews,
   deleteNews,
   editNews,
+  getStaticContent,
+  createStaticContent,
+  deleteStaticContent,
+  editStaticContent,
 }

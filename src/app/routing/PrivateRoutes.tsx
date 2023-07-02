@@ -20,6 +20,7 @@ import DriversAction from '../modules/driver/DriversAction'
 import StaticLinksContent from '../modules/content/StaticLinksContent'
 import FaqContent from '../modules/content/FaqContent'
 import NewsContent from '../modules/content/NewsContent'
+import StaticContent from '../modules/content/StaticContent'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -46,6 +47,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard/content/static-link' element={<StaticLinksContent />} />
         <Route path='dashboard/content/faq' element={<FaqContent />} />
         <Route path='dashboard/content/news' element={<NewsContent />} />
+        <Route path='dashboard/content/static-content' element={<StaticContent />} />
 
         
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />

@@ -94,6 +94,35 @@ const useDeleteNews = () => {
   })
 }
 
+// StaticContent
+
+const useFetchStaticContent = () => {
+  return useQuery(['staticcontent'], api.getStaticContent)
+}
+
+const useCreateStaticContent = () => {
+  return useMutation((formData: any) => {
+    return api.createStaticContent(formData) 
+  })
+}
+
+const useEditStaticContent = () => {
+  return useMutation((formData: any) => {
+    return api.editStaticContent(formData)
+  })
+}
+
+const useDeleteStaticContent = () => {
+  const queryClient = useQueryClient()
+  return useMutation(api.deleteStaticContent, {
+    onSuccess: (_, id) => {
+      const staticcontent: any = queryClient.getQueryData(['staticcontent'])
+      const data = staticcontent?.filter((item: any) => item.id !== id)
+      queryClient.setQueryData(['staticcontent'], data)
+    },
+  })
+}
+
 export {
   useFetchStaticLinks,
   useCreateStaticLinks,
@@ -107,4 +136,8 @@ export {
   useCreateNews,
   useEditNews,
   useDeleteNews,
+  useFetchStaticContent,
+  useCreateStaticContent,
+  useEditStaticContent,
+  useDeleteStaticContent,
 }
