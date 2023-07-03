@@ -45,6 +45,10 @@ const getBillandingStatus = async () => {
     const { data } = await dashboardHttp.get('/BillLanding/GetBLandStatus')
     return data
 }
+const getLandingLocation = async () => {
+    const { data } = await dashboardHttp.get('/TransportTurn/GetLadingLocations')
+    return data
+}
 
 
 export {
@@ -56,5 +60,6 @@ export {
     getPlateList,
     getProvince,
     getCity,
-    getBillandingStatus
+    getBillandingStatus,
+    getLandingLocation
 }

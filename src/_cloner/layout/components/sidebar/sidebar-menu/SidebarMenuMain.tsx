@@ -14,6 +14,12 @@ const SidebarMenuMain = () => {
         title='تعریف راننده'
         fontIcon='bi-app-indicator'
       />
+      <SidebarMenuItem
+        to='/dashboard/reserve'
+        icon='/media/icons/duotune/art/art002.svg'
+        title='نوبت دهی'
+        fontIcon='bi-app-indicator'
+      />
       {/* <SidebarMenuItem
         to='/CustomerCallRegistration'
         icon='/media/icons/duotune/general/gen019.svg'

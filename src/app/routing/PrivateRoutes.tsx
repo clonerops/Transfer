@@ -22,6 +22,7 @@ import FaqContent from '../modules/content/FaqContent'
 import NewsContent from '../modules/content/NewsContent'
 import StaticContent from '../modules/content/StaticContent'
 import TicketContent from '../modules/content/TicketContent'
+import Reserve from '../modules/reserve/Reserve'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -50,7 +51,8 @@ const PrivateRoutes = () => {
         <Route path='dashboard/content/news' element={<NewsContent />} />
         <Route path='dashboard/content/static-content' element={<StaticContent />} />
         <Route path='dashboard/content/ticket' element={<TicketContent />} />
-
+        {/* Reserve */}
+        <Route path='dashboard/reserve' element={<Reserve />} />
         
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />

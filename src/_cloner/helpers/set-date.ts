@@ -3,3 +3,9 @@ export const setDate = () => {
     let yesterday = date - 1000 * 60 * 60 * 72 * 2;   // current date's milliseconds - 1,000 ms * 60 s * 60 mins * 24 hrs * (# of days beyond one to go back)
     return new Date(yesterday);
 }
+
+export const oneMonthLater = () => {
+    var oneMonthAfterDate = new Date();
+    return oneMonthAfterDate.setMonth(oneMonthAfterDate.getMonth() + 1);
+
+}

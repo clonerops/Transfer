@@ -36,6 +36,10 @@ const useCity = (id: number) => {
 const useBillandingStatus = () => {
     return useQuery('BlStatus', api.getBillandingStatus)
 }
+
+const useLandingLocation = () => {
+    return useQuery('landingLocation', api.getLandingLocation)
+}
  
 export { 
     useParkings,
@@ -46,5 +50,6 @@ export {
     usePlateList,
     useProvince,
     useCity,
-    useBillandingStatus
+    useBillandingStatus,
+    useLandingLocation
 }
