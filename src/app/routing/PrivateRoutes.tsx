@@ -23,6 +23,9 @@ import NewsContent from '../modules/content/NewsContent'
 import StaticContent from '../modules/content/StaticContent'
 import TicketContent from '../modules/content/TicketContent'
 import Reserve from '../modules/reserve/Reserve'
+import DoubleBilllanding from '../modules/billlandingManagment/DoubleBilllanding'
+import VisionBilllannding from '../modules/billlandingManagment/VisionBilllannding'
+import CancelBilllanding from '../modules/billlandingManagment/CancelBilllanding'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -53,7 +56,11 @@ const PrivateRoutes = () => {
         <Route path='dashboard/content/ticket' element={<TicketContent />} />
         {/* Reserve */}
         <Route path='dashboard/reserve' element={<Reserve />} />
-        
+        {/* Billlanding */}
+        <Route path='dashboard/billlanding/double' element={<DoubleBilllanding />} />
+        <Route path='dashboard/billlanding/vision' element={<VisionBilllannding />} />
+        <Route path='dashboard/billlanding/cancel' element={<CancelBilllanding />} />
+
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
         {/* Lazy Modules */}

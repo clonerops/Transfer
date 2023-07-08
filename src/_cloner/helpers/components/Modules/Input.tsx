@@ -21,6 +21,7 @@ const Input = (props: any) => {
                             }
                         )}
                         type={props.type}
+                        ref={props.ref}
                         name={props.name}
                         autoComplete="off"
                     />
@@ -48,6 +49,7 @@ const Input = (props: any) => {
                         )}
                         type={props.type}
                         name={props.name}
+                        ref={props.ref}
                         value={props.value}
                         onChange={props.onChange}
                         autoComplete="off"
@@ -63,6 +65,7 @@ const Input = (props: any) => {
                     <input
                         {...props.getFieldProps(props.name)}
                         defaultValue={props.defaultValue}
+                        ref={props.ref}
                         className={clsx(
                             `${props.className} form-control text-md h-10 border border-gray-400 bg-transparent text-center font-VazirBold`,
                             {
@@ -88,8 +91,27 @@ const Input = (props: any) => {
                         </div>
                     )}
                 </div>
+            ) : props.reqular ? (
+                <div className="">
+                    <label className="dropdown__label">
+                        {props.title}
+                    </label>
+                    <input
+                        defaultValue={props.defaultValue}
+                        type={props.type}
+                        placeholder={props.placeholder}
+                        name={props.name}
+                        ref={props.ref}
+                        value={props.value}
+                        className={`form-control rounded-md text-md h-11 border border-gray-400 bg-transparent text-center font-VazirBold ${props.className}`}
+                        id={props.id}
+                        disabled={props.disabled}
+                        onChange={props.onChange}
+                        autoComplete="off"
+                    />
+                </div>
             ) : (
-                <div className="fv-row mb-4 flex flex-col items-start">
+                <div className="fv-row mb-4 flex-1 flex flex-col items-start">
                     <label className="form-label fw-bolder text-dark">
                         {props.title}
                     </label>
@@ -108,6 +130,7 @@ const Input = (props: any) => {
                         type={props.type}
                         name={props.name}
                         value={props.value}
+                        ref={props.ref}
                         id={props.id}
                         disabled={props.disabled}
                         onChange={props.onChange}

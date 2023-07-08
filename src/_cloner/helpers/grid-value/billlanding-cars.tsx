@@ -1,0 +1,95 @@
+import {toAbsoluteUrl} from '../AssetHelpers'
+
+export const billlandingCarsGrid = () => {
+
+  return [
+    {
+      field: 'proD_NO',
+      headerName: 'شماره ساخت',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'chassiS_NO',
+      headerName: 'شماره شاسی',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'caR_CLASS_NAME',
+      headerName: 'نام خودرو',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'clR_DESC',
+      headerName: 'رنگ خودرو',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'p_DLVR_DATE',
+      headerName: 'تاریخ تحویل',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'plaquE_RECEIPT_DATE',
+      headerName: 'تاریخ رسید پلاک',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'companyname',
+      headerName: 'شرکت سازنده',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'loC_NAME',
+      headerName: 'پارکینگ',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'brnC_DLVR_NAME',
+      headerName: 'نمایندگی',
+      minWidth: 240,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'prvN_NAME',
+      headerName: 'استان',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+    {
+      field: 'citY_NAME',
+      headerName: 'شهر',
+      minWidth: 140,
+      cellStyle: {'white-space': 'normal', 'font-size': '12px', 'text-align': 'center'},
+      autoHeight: true,
+      headerClass: 'bg-indigo-500 text-white',
+    },
+  ]
+}
