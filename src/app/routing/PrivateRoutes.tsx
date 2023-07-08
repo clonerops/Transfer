@@ -26,6 +26,7 @@ import Reserve from '../modules/reserve/Reserve'
 import DoubleBilllanding from '../modules/billlandingManagment/DoubleBilllanding'
 import VisionBilllannding from '../modules/billlandingManagment/VisionBilllannding'
 import CancelBilllanding from '../modules/billlandingManagment/CancelBilllanding'
+import ExitBilllannding from '../modules/billlandingManagment/ExitBilllanding'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -60,6 +61,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard/billlanding/double' element={<DoubleBilllanding />} />
         <Route path='dashboard/billlanding/vision' element={<VisionBilllannding />} />
         <Route path='dashboard/billlanding/cancel' element={<CancelBilllanding />} />
+        <Route path='dashboard/billlanding/exit' element={<ExitBilllannding />} />
 
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />

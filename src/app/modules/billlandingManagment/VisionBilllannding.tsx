@@ -4,8 +4,15 @@ import { billlandingCarsGrid } from "../../../_cloner/helpers/grid-value/billlan
 import InformationBillanding from "./components/InformationBillanding";
 import { useGetBillandingDetail } from "./core/_hooks";
 import Input from "../../../_cloner/helpers/components/Modules/Input";
+import Modal from "../../../_cloner/helpers/Modal";
+import { FC, useState } from "react";
 
-const VisionBilllannding = () => {
+interface IProps {
+    isExit?: boolean;
+    isCancel?: boolean;
+}
+
+const VisionBilllannding: FC<IProps> = ({ isExit, isCancel }) => {
     const { mutate, data: billlanding } = useGetBillandingDetail();
 
     const initialValues = {
@@ -45,18 +52,6 @@ const VisionBilllannding = () => {
                         جستجو
                     </button>
                 </form>
-                {billlanding && (
-                    <>
-                        <div>
-                            <button className="m-2 mt-6 rounded-md bg-green-600 p-2 text-white">
-                                خروج حواله
-                            </button>
-                            <button className="m-2 mt-6 rounded-md bg-red-600 p-2 text-white">
-                                ابطال حواله
-                            </button>
-                        </div>
-                    </>
-                )}
             </div>
             <div className="grid grid-cols-4 gap-x-2 gap-y-2">
                 <InformationBillanding

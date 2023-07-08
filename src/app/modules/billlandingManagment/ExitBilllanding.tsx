@@ -2,17 +2,18 @@ import { useFormik } from "formik";
 import MainGrid from "../../../_cloner/helpers/components/MainGrid";
 import { billlandingCarsGrid } from "../../../_cloner/helpers/grid-value/billlanding-cars";
 import InformationBillanding from "./components/InformationBillanding";
-import { useCancelBilllanding, useGetBillandingDetail } from "./core/_hooks";
+import { useExitBilllanding, useGetBillandingDetail } from "./core/_hooks";
 import Input from "../../../_cloner/helpers/components/Modules/Input";
 import Modal from "../../../_cloner/helpers/Modal";
 import { useState } from "react";
 
-const CancelBilllannding = () => {
+const ExitBilllannding = () => {
     const [isOpen, setIsOpen] = useState(false);
     const handleClose = () => setIsOpen(false);
+    const [desc, setDesc] = useState('')
 
     const { mutate, data: billlanding } = useGetBillandingDetail();
-    const { mutate: cancel, data: cancelData } = useCancelBilllanding();
+    const { mutate: exit, data: exitData } = useExitBilllanding();
 
     const initialValues = {
         search: "",
@@ -31,8 +32,13 @@ const CancelBilllannding = () => {
         },
     });
 
-    const handleCancel = () => {
-        cancel(billlanding?.id)
+    const handleExit = () => {
+        const formData = {
+            billLandingId: billlanding?.id,
+            toStatus: billlanding?.billlandingStatusId,
+            description: desc
+        }
+        exit(formData)
         setIsOpen(false)
     }
 
@@ -61,9 +67,9 @@ const CancelBilllannding = () => {
                         <div>
                             <button
                                 onClick={() => setIsOpen(true)}
-                                className="m-2 mt-6 rounded-md bg-red-600 p-2 text-white"
+                                className="m-2 mt-6 rounded-md bg-green-600 p-2 text-white"
                             >
-                                ابطال حواله
+                                خروج حواله
                             </button>
                         </div>
                     </>
@@ -133,15 +139,22 @@ const CancelBilllannding = () => {
             </div>
             <Modal isOpen={isOpen} onClose={handleClose} reqular>
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div className="flex justify-center items-center">
-                        <span className="text-center font-VazirBold">{`ایا از ابطال بارنامه به شماره ${billlanding?.id} اطمینان دارید؟`}</span>
+                    <div className="flex items-center justify-center">
+                        <span className="text-center font-VazirBold">{`ایا از خروج بارنامه به شماره ${billlanding?.id} اطمینان دارید؟`}</span>
                     </div>
                     <div>
-                        <Input placeholder='توضیحات'  reqular/>
+                        <Input value={desc} onChange={(e: any) => setDesc(e.target.value)} placeholder="توضیحات" reqular />
                     </div>
-                    <div className="flex flex-row items-end justify-end gap-2 mt-8">
-                        <button onClick={handleCancel} className="text-white px-8 py-1 bg-green-500 rounded-lg">بله</button>
-                        <button onClick={handleClose} className="text-white px-8 py-1 bg-red-500 rounded-lg">خیر</button> 
+                    <div className="mt-8 flex flex-row items-end justify-end gap-2">
+                        <button onClick={handleExit} className="rounded-lg bg-green-500 px-8 py-1 text-white">
+                            بله
+                        </button>
+                        <button
+                            onClick={handleClose}
+                            className="rounded-lg bg-red-500 px-8 py-1 text-white"
+                        >
+                            خیر
+                        </button>
                     </div>
                 </div>
             </Modal>
@@ -149,4 +162,4 @@ const CancelBilllannding = () => {
     );
 };
 
-export default CancelBilllannding;
+export default ExitBilllannding;

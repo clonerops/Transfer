@@ -37,3 +37,10 @@ export interface CarModel {
     carDestReceiptDate: string | null;
     parkingReceiptDate: string | null;
 }
+
+
+export interface ExitModel {
+    billLandingId: number
+    toStatus: number
+    description: string
+}
