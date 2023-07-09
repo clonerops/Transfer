@@ -6,10 +6,12 @@ interface IProps {
   data?: any
   columnDefs?: any
   rowSelection?: any
+  ref?: any
+  onSelectionChanged?: any
   rowMultiSelectWithClick?: boolean
 }
 
-const MainGrid: FC<IProps> = ({data, columnDefs, rowSelection, rowMultiSelectWithClick}) => {
+const MainGrid: FC<IProps> = ({data, columnDefs, ref, onSelectionChanged, rowSelection, rowMultiSelectWithClick}) => {
 
   const output = document.getElementById("ag-4-start-page");
   if (output) output.innerText = 'صفحه'
@@ -51,6 +53,7 @@ const MainGrid: FC<IProps> = ({data, columnDefs, rowSelection, rowMultiSelectWit
         rowData={data}
         className='font-Vazir'
         columnDefs={columnDefs}
+        ref={ref}
         enableRtl={true}
         overlayNoRowsTemplate='داده ای برای نمایش وجود ندارد'
         overlayLoadingTemplate='...در حال بارگزاری'
@@ -61,6 +64,7 @@ const MainGrid: FC<IProps> = ({data, columnDefs, rowSelection, rowMultiSelectWit
         // pagination={true}
         cacheQuickFilter={true}
         paginationPageSize={10}
+        onSelectionChanged={onSelectionChanged}
         autoGroupColumnDef={autoGroupColumnDef}
         defaultColDef={defaultColDef}
         suppressRowVirtualisation={true}

@@ -43,3 +43,13 @@ export const dropdownParkings = (data: any) => {
         })
     );
 };
+
+export const dropdownReceipt = (data: any) => {
+    return (
+        data &&
+        data?.map((obj: { id: any; description: any }): any => {
+            const { id, description } = obj;
+            return { value: id, label: description};
+        })
+    );
+};

@@ -44,15 +44,24 @@ export interface Driver {
     plateId: number;
 }
 
-
-
 export interface ExitModel {
-    billLandingId: number
-    toStatus: number
-    description: string
+    billLandingId: number;
+    toStatus: number;
+    description: string;
 }
 export interface TransferModel {
-    billLandingId: number
-    newDriverId: number | undefined
-    description: string
+    billLandingId: number;
+    newDriverId: number | undefined;
+    description: string;
+}
+
+export interface ReceiptBilllanding {
+    billLandingId: number;
+    cars: ReceiptCars[];
+}
+
+export interface ReceiptCars {
+    description: string;
+    id: number;
+    deliveryStatus: number;
 }

@@ -28,6 +28,7 @@ import VisionBilllannding from '../modules/billlandingManagment/VisionBilllanndi
 import CancelBilllanding from '../modules/billlandingManagment/CancelBilllanding'
 import ExitBilllannding from '../modules/billlandingManagment/ExitBilllanding'
 import TransferBilllannding from '../modules/billlandingManagment/TransferBilllanding'
+import ReceiptBilllannding from '../modules/billlandingManagment/ReceiptBilllanding'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -64,6 +65,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard/billlanding/cancel' element={<CancelBilllanding />} />
         <Route path='dashboard/billlanding/exit' element={<ExitBilllannding />} />
         <Route path='dashboard/billlanding/transfer' element={<TransferBilllannding />} />
+        <Route path='dashboard/billlanding/receipt' element={<ReceiptBilllannding />} />
 
         <Route path='CustomerCallRegistration' element={<CustomerCallRegistration />} />
         <Route path='ConnectToCallCenter' element={<ConnectToCallCenter />} />
