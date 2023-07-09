@@ -2,18 +2,42 @@ import { useFormik } from "formik";
 import MainGrid from "../../../_cloner/helpers/components/MainGrid";
 import { billlandingCarsGrid } from "../../../_cloner/helpers/grid-value/billlanding-cars";
 import InformationBillanding from "./components/InformationBillanding";
-import { useExitBilllanding, useGetBillandingDetail } from "./core/_hooks";
+import { useGetBillandingDetail, useTransferBilllanding } from "./core/_hooks";
 import Input from "../../../_cloner/helpers/components/Modules/Input";
 import Modal from "../../../_cloner/helpers/Modal";
-import { useState } from "react";
+import { FC, useState } from "react";
+import { useDrivers, usePlateList } from "../../../_cloner/hooks/_hooks";
+import {
+    dropdownDrivers,
+    dropdownPlates,
+} from "../../../_cloner/helpers/dropdownValue1";
+import ProfessionalSelect from "../../../_cloner/helpers/components/Modules/ProfeesionalSelect";
+import { Driver } from "./core/_models";
 
-const ExitBilllannding = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const handleClose = () => setIsOpen(false);
+interface IProps {
+    isExit?: boolean;
+    isCancel?: boolean;
+}
+
+const TransferBilllannding: FC<IProps> = ({ isExit, isCancel }) => {
+    const [driverValue, setDriverValue] = useState<Driver>();
+    const [plateValue, setPlateValue] = useState({});
     const [desc, setDesc] = useState('')
 
+    const { data: drivers } = useDrivers();
+    const { data: plates } = usePlateList();
+    const driverChange = (selected: any) => {
+        setDriverValue(selected);
+        const findPlate = plates?.find(
+            (item: any) => item.id == selected?.plateId
+        );
+        setPlateValue({ value: findPlate.id, label: findPlate.platE_NO });
+    };
+    const plateChange = (selected: any) => setPlateValue(selected);
+
     const { mutate, data: billlanding } = useGetBillandingDetail();
-    const { mutate: exit, data: exitData } = useExitBilllanding();
+    const { mutate: transfer, data: transferData } = useTransferBilllanding();
+
 
     const initialValues = {
         search: "",
@@ -32,15 +56,15 @@ const ExitBilllannding = () => {
         },
     });
 
-    const handleExit = () => {
+    const handleTransfer = () => {
         const formData = {
             billLandingId: billlanding?.id,
-            toStatus: billlanding?.billlandingStatusId,
+            newDriverId: driverValue?.value,
             description: desc
         }
-        exit(formData)
-        setIsOpen(false)
+        transfer(formData)
     }
+
 
     return (
         <>
@@ -62,20 +86,8 @@ const ExitBilllannding = () => {
                         جستجو
                     </button>
                 </form>
-                {billlanding && (
-                    <>
-                        <div>
-                            <button
-                                onClick={() => setIsOpen(true)}
-                                className="m-2 mt-6 rounded-md bg-green-600 p-2 text-white"
-                            >
-                                خروج حواله
-                            </button>
-                        </div>
-                    </>
-                )}
             </div>
-            <div className="grid grid-cols-4 gap-x-2 gap-y-2">
+            <div className="grid grid-cols-5 gap-x-2 gap-y-2">
                 <InformationBillanding
                     title="شماره حواله"
                     description={billlanding?.id}
@@ -119,7 +131,6 @@ const ExitBilllannding = () => {
                 <InformationBillanding
                     title="وضعیت حواله"
                     description={billlanding?.billLandingStatusDesc}
-                    className="col-span-2"
                 />
                 <InformationBillanding
                     title="توضیحات"
@@ -137,28 +148,32 @@ const ExitBilllannding = () => {
                     columnDefs={billlandingCarsGrid()}
                 />
             </div>
-            <Modal isOpen={isOpen} onClose={handleClose} reqular>
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div className="flex items-center justify-center">
-                        <span className="text-center font-VazirBold">{`ایا از خروج بارنامه به شماره ${billlanding?.id} اطمینان دارید؟`}</span>
-                    </div>
-                    <div>
-                        <Input value={desc} onChange={(e: any) => setDesc(e.target.value)} placeholder="توضیحات" reqular />
-                    </div>
-                    <div className="mt-8 flex flex-row items-end justify-end gap-2">
-                        <button onClick={handleExit} className="rounded-lg bg-green-500 px-8 py-1 text-white">
-                            بله
-                        </button>
-                        <button
-                            onClick={handleClose}
-                            className="rounded-lg bg-red-500 px-8 py-1 text-white"
-                        >
-                            خیر
-                        </button>
-                    </div>
+            <div className="grid grid-cols-2 gap-8 pt-8">
+                <ProfessionalSelect
+                    custom={true}
+                    options={dropdownDrivers(drivers)}
+                    onChange={driverChange}
+                    name="driverOption"
+                    title="رانندگان"
+                    placeholder=""
+                />
+                <ProfessionalSelect
+                    custom={true}
+                    options={dropdownPlates(plates)}
+                    onChange={plateChange}
+                    value={plateValue}
+                    name="plateOption"
+                    title="شماره انتظامی"
+                    placeholder=""
+                />
+                <Input title='توضیحات' value={desc} onChange={(e: any) => setDesc(e.target.value)} reqular/>
+                <div className="mt-4">
+                    <button onClick={handleTransfer} className="text-white px-8 py-4 bg-green-500 rounded-lg">ثبت انتقال</button>
                 </div>
-            </Modal>
+            </div>
+
         </>
     );
 };
-export default ExitBilllannding;
+
+export default TransferBilllannding;

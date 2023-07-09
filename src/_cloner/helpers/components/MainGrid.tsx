@@ -46,7 +46,7 @@ const MainGrid: FC<IProps> = ({data, columnDefs, rowSelection, rowMultiSelectWit
 
 
   return (
-    <div className='ag-theme-alpine' style={{ height: 420 }}>
+    <div className='ag-theme-alpine'>
       <AgGridReact
         rowData={data}
         className='font-Vazir'

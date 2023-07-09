@@ -1,5 +1,5 @@
 import { dashboardHttp } from "../../../../_cloner/helpers/apiConfig"
-import { ExitModel } from "./_models"
+import { ExitModel, TransferModel } from "./_models"
 
 const getCarsByUserId = async () => {
     const { data } = await dashboardHttp.get('/SaleSystem/DeliverableCarsByUserId')
@@ -21,5 +21,11 @@ const exitBilllanding = async (formData: ExitModel) => {
     const { data } = await dashboardHttp.post(`/BillLanding/UpdateBillLandingStatus`, JSON.stringify(formData))
     return data
 }
+// Billanding Transfer
+const transferBilllanding = async (formData: TransferModel) => {
+    const { data } = await dashboardHttp.post(`/BillLanding/TrasferBLandingToOtherDriver`, JSON.stringify(formData))
+    return data
+}
 
-export { getCarsByUserId, getBillandingDetail, cancelBilllanding, exitBilllanding }
+
+export { getCarsByUserId, getBillandingDetail, cancelBilllanding, exitBilllanding, transferBilllanding }

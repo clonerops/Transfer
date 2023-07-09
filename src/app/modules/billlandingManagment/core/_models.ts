@@ -38,9 +38,21 @@ export interface CarModel {
     parkingReceiptDate: string | null;
 }
 
+export interface Driver {
+    value: number;
+    label: string;
+    plateId: number;
+}
+
+
 
 export interface ExitModel {
     billLandingId: number
     toStatus: number
+    description: string
+}
+export interface TransferModel {
+    billLandingId: number
+    newDriverId: number | undefined
     description: string
 }

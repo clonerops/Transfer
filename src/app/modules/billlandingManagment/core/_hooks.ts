@@ -1,6 +1,6 @@
 import {  useMutation, useQuery } from "@tanstack/react-query"
 import * as api from './_requests'
-import { ExitModel } from "./_models"
+import { ExitModel, TransferModel } from "./_models"
 
 const useGetCarsByUserId = () => {
     return useQuery(['cars'], api.getCarsByUserId)
@@ -24,4 +24,10 @@ const useExitBilllanding = () => {
     })
 }
 
-export { useGetCarsByUserId, useGetBillandingDetail,useCancelBilllanding, useExitBilllanding }
+const useTransferBilllanding = () => {
+    return useMutation((formData: TransferModel) => {
+        return api.transferBilllanding(formData)
+    })
+}
+
+export { useGetCarsByUserId, useGetBillandingDetail,useCancelBilllanding, useExitBilllanding, useTransferBilllanding }

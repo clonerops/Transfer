@@ -20,15 +20,10 @@ import {
 import { Card5 } from "../../../_cloner/partials/content/cards/Card5";
 import { useCallback, useState } from "react";
 import { useGetCarsByUserId } from "./core/_hooks";
-import { CarModel } from "./core/_models";
+import { CarModel, Driver } from "./core/_models";
 import Modal from "../../../_cloner/helpers/Modal";
 import { doubleBilllandingCarSelectGrid } from "../../../_cloner/helpers/grid-value/double-billlanding-cars-select";
 
-interface Driver {
-    value: number;
-    label: string;
-    plateId: number;
-}
 
 const DoubleBilllanding = () => {
     const [driverValue, setDriverValue] = useState<Driver>();
