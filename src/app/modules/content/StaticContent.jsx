@@ -35,7 +35,6 @@ const StaticContent = () => {
     };
 
     const { data: staticContent } = useFetchStaticContent();
-    console.log(staticContent)
     return (
         <>
             <Card5 title="محتوا ثابت" image="/media/svg/brand-logos/aven.svg">

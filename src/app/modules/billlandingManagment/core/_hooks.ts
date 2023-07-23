@@ -6,6 +6,10 @@ const useGetCarsByUserId = () => {
     return useQuery(["cars"], api.getCarsByUserId);
 };
 
+const useGetGroupCarsByUserId = () => {
+    return useQuery(["groupcars"], api.getGroupCarsByUserId);
+};
+
 const useGetBillandingDetail = () => {
     return useMutation((id: number) => {
         return api.getBillandingDetail(id);
@@ -38,6 +42,7 @@ const useReceiptBilllanding = () => {
 
 export {
     useGetCarsByUserId,
+    useGetGroupCarsByUserId,
     useGetBillandingDetail,
     useCancelBilllanding,
     useExitBilllanding,

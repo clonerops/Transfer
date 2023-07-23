@@ -33,10 +33,10 @@ const ReceiptBilllannding: FC<IProps> = ({ isExit, isCancel }) => {
     const { mutate, data: billlanding } = useGetBillandingDetail();
     const { mutate: receipt, data: receiptData } = useReceiptBilllanding();
 
-    const onSelectionChanged = useCallback((event: any) => {
-        setSelectedCars(event.api.getSelectedRows());
-        // eslint-disable-next-line
-    }, []);
+    // const onSelectionChanged = useCallback((event: any) => {
+    //     setSelectedCars(event.api.getSelectedRows());
+    //     // eslint-disable-next-line
+    // }, []);
 
     const initialValues = {
         search: "",
@@ -150,7 +150,7 @@ const ReceiptBilllannding: FC<IProps> = ({ isExit, isCancel }) => {
                     rowSelection={"multiple"}
                     rowMultiSelectWithClick={true}
                     ref={gridRef}
-                    onSelectionChanged={onSelectionChanged}
+                    // onSelectionChanged={onSelectionChanged}
                 />
             </div>
             <div className="w-50">

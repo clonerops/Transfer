@@ -25,7 +25,6 @@ const CustomerCallRegistration = () => {
 
   const SearchCustomer = (e: React.SyntheticEvent<EventTarget>): void => {
     e.preventDefault()
-    console.log(values.nationalcode)
     // setShowModal(true)
   }
 

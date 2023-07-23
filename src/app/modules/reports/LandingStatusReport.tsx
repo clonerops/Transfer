@@ -50,7 +50,6 @@ const LandingStatusReport = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: async (values, {setStatus, setSubmitting}) => {
-      console.log(values)
       try {
         mutate(
           {

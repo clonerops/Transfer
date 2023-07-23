@@ -23,8 +23,6 @@ const EditStaticContent: FC<IProps> = ({ isOpen, setIsOpen, items }) => {
     const { mutate } = useEditStaticContent();
     const { refetch } = useFetchStaticContent();
 
-    console.log(items)
-
     const formik = useFormik({
         initialValues: items,
         enableReinitialize: true,

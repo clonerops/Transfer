@@ -22,7 +22,6 @@ const useCarStatusRequest = (): UseMutationResult<any, unknown, any, unknown> =>
 
 const useBillandingChartRequest = (): UseMutationResult<any, unknown, any, unknown> => {
   return useMutation((formData: BillandingChart) => {
-    console.log('formData', formData)
     return api.getBillandigChartRequest(formData)
   })
 }
@@ -39,7 +38,6 @@ const useLandingStatusRequest = (): UseMutationResult<any, unknown, any, unknown
 }
 const useTemporaryStatusRequest = (): UseMutationResult<any, unknown, any, unknown> => {
   return useMutation((formData: TemporaryStatus) => {
-    console.log('formData', formData)
     return api.getTemporaryStatus(formData)
   })
 }

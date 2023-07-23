@@ -6,28 +6,18 @@ import {Dropdown1} from '../dropdown/Dropdown1'
 type Props = {
   image: string
   title: string
+  modalCard?:boolean
   children: React.ReactNode
-  // description: string
-  // status: 'up' | 'down'
-  // statusValue: number
-  // statusDesc: string
-  // progress: number
-  // progressType: string
 }
 
 const Card5: FC<Props> = ({
   image,
   title,
+  modalCard,
   children
-  // description,
-  // status,
-  // statusValue,
-  // statusDesc,
-  // progress,
-  // progressType,
 }) => {
   return (
-    <div className='card h-100 shadow-lg'>
+    <div className={`card ${modalCard ? 'h-1-1': 'h-full'}  shadow-lg`}>
       <div className='card-header flex-nowrap border-0 pt-1'>
         <div className='card-title m-0'>
           <div className='symbol symbol-45px w-45px bg-light me-5'>

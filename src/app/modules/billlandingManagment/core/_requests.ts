@@ -7,6 +7,12 @@ const getCarsByUserId = async () => {
     );
     return data;
 };
+const getGroupCarsByUserId = async () => {
+    const { data } = await dashboardHttp.get(
+        "/SaleSystem/GroupedDeliverableCars"
+    );
+    return data;
+};
 
 // Billanding Detail
 const getBillandingDetail = async (id: number) => {
@@ -47,6 +53,7 @@ const receiptBilllanding = async (formData: ReceiptBilllanding) => {
 
 export {
     getCarsByUserId,
+    getGroupCarsByUserId,
     getBillandingDetail,
     cancelBilllanding,
     exitBilllanding,

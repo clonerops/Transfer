@@ -62,9 +62,10 @@ const ProfessionalSelect = (props: any) => {
                     options={props.options}
                     onChange={props.onChange}
                     defaultInputValue={props.defaultInputValue}
-                    className="h-full rounded-md text-md"
+                    className="rounded-md text-md"
                     defaultValue={props.defaultValue}
                     value={props.value}
+                    isDisabled={props.disabled}
                     placeholder={props.placeholder}
                     inputValue={inputValue}
                     name={props.name}
@@ -81,10 +82,11 @@ const ProfessionalSelect = (props: any) => {
                     options={props.options}
                     onChange={props.onChange}
                     defaultInputValue={props.defaultInputValue}
-                    className="h-full rounded-md text-md"
+                    className="rounded-md text-md"
                     defaultValue={props.defaultValue}
                     placeholder={props.placeholder}
                     inputValue={inputValue}
+                    isDisabled={props.disabled}
                     name={props.name}
                     styles={customStyles}
                     onInputChange={handleInputChange}
