@@ -48,10 +48,10 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 24, 28, 50;
   --bs-body-bg-rgb: 255, 255, 255;
-  --bs-font-sans-serif: Inter, Helvetica, VazirThin;
+  --bs-font-sans-serif: Inter, Helvetica, YekanThin;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: VazirThin;
+  --bs-body-font-family: YekanThin;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -6105,7 +6105,7 @@ textarea.form-control-lg {
   display: block;
   padding: var(--bs-tooltip-arrow-height);
   margin: var(--bs-tooltip-margin);
-  font-family: VazirThin;
+  font-family: YekanThin;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6207,7 +6207,7 @@ textarea.form-control-lg {
   z-index: var(--bs-popover-zindex);
   display: block;
   max-width: var(--bs-popover-max-width);
-  font-family:VazirThin;
+  font-family:YekanThin;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -50215,7 +50215,7 @@ body[data-kt-sticky-landing-header=on] {
 }
 
 html {
-  font-family: VazirThinThin;
+  font-family: YekanThinThin;
   text-size-adjust: 100%;
 }
 
@@ -50228,7 +50228,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 13px !important;
   font-weight: 400;
-  font-family: VazirThin;
+  font-family: YekanThin;
 }
 @media (max-width: 991.98px) {
   html,

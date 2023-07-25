@@ -124,7 +124,7 @@ const Reserve = () => {
         </div>
       </form>
       <section className='mt-8'>
-        <span className='py-8 font-VazirBold text-xl'>نتیجه گزارش</span>
+        <span className='py-8 font-YekanBold text-xl'>نتیجه گزارش</span>
         <MainGrid data={transports} columnDefs={ReserveGrid(openModal)} />
       </section>
       <ConfirmReserve isOpen={isOpen} setIsOpen={setIsOpen} items={items} />

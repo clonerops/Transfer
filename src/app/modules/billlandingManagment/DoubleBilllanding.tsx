@@ -24,16 +24,20 @@ import { CarModel, Driver } from "./core/_models";
 import Modal from "../../../_cloner/helpers/Modal";
 import { doubleBilllandingCarSelectGrid } from "../../../_cloner/helpers/grid-value/double-billlanding-cars-select";
 import Tab from "./components/Tab";
-import moment from "moment-jalaali";
+import Button from "./components/Button";
+import MainModalGrid from "./components/MainModalGrid";
 
 const DoubleBilllanding = () => {
     const [driverValue, setDriverValue] = useState<Driver>();
-    const [plateValue, setPlateValue] = useState({});
+    const [plateValue, setPlateValue] = useState<any>(null);
+    const [originValue, setOriginValue] = useState<any>(null);
+    const [destinationValue, setDestinationValue] = useState<any>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [isGroupOpen, setIsGroupOpen] = useState(false);
     const [isCargo, setIsCargo] = useState<any>(false);
 
     const [selectedCars, setSelectedCars] = useState<any>([]);
+    const [modalSelectedCars, setModalSelectedCars] = useState<any>([]);
 
     const initialValues = {
         contractorOption: "",
@@ -72,6 +76,10 @@ const DoubleBilllanding = () => {
         setPlateValue({ value: findPlate.id, label: findPlate.platE_NO });
     };
     const plateChange = (selectedOption: any) => setPlateValue(selectedOption);
+    const originChange = (selectedOption: any) =>
+        setOriginValue(selectedOption);
+    const destinationChange = (selectedOption: any) =>
+        setDestinationValue(selectedOption);
 
     const [inputs, setInputs] = useState({ productNo: "" });
     const onChangeHandler = useCallback(
@@ -83,43 +91,91 @@ const DoubleBilllanding = () => {
 
     const handleSelectCars = (e: any) => {
         e.preventDefault();
-
+        // Find Product and Duplicate Product
         const findProduct = cars?.result.find(
             (item: CarModel) => item.proD_NO == Number(inputs.productNo)
         );
-        setSelectedCars((prev: any) => [...prev, findProduct]);
+        const duplicateProduct = selectedCars?.map(
+            (item: CarModel) => item.proD_NO
+        );
+        // Check Conditions
+        if (originValue === null) {
+            alert("لطفا مبدا خود را وارد نمائید!");
+        } else if (inputs.productNo === "" || inputs.productNo === null) {
+            alert("شماره ساخت موردظر خود را وارد نمایید!");
+        } else if (!findProduct) {
+            alert("شماره ساخت وارد شده موجود نمی باشد!");
+        } else if (duplicateProduct.includes(Number(inputs.productNo))) {
+            alert("شماره ساخت موردنظر قبلا ثبت شده است!");
+        } else if (findProduct.loC_CODE !== originValue?.value) {
+            alert("پارکینگ ها مغایرت دارند!");
+        } else {
+            setSelectedCars((prev: any) => [...prev, findProduct]);
+            setInputs({ productNo: "" });
+        }
     };
 
-    const handleClose = () => setIsOpen(false);
-    const handleGroupClose = () => setIsGroupOpen(false);
+    const handleConfirmFromList = () => {
+        const duplicateProduct = selectedCars?.map(
+            (item: CarModel) => item.proD_NO
+        );
+        let alertTriggered = false;
+
+        modalSelectedCars.forEach((element: any) => {
+            if (element.loC_CODE !== originValue?.value && !alertTriggered) {
+                alert(
+                    `شماره ساخت ${element.proD_NO} با پارکینگ انتخاب شده مغایرت دارد!`
+                );
+                alertTriggered = true;
+            } else if (
+                duplicateProduct.includes(element.proD_NO) &&
+                !alertTriggered
+            ) {
+                alert(`شماره ساخت ${element.proD_NO} قبلا ثبت شده است!`);
+                alertTriggered = true;
+            } else {
+                element.selected = true;
+                const chooseCars = [
+                    ...new Set([...selectedCars, ...modalSelectedCars]),
+                ];
+                const uniqueCars = chooseCars.filter((item, index) => {
+                    return (
+                        index ===
+                        chooseCars.findIndex((itemIndex) => {
+                            return itemIndex.proD_NO === item.proD_NO;
+                        })
+                    );
+                });
+                setSelectedCars(uniqueCars);
+                setIsOpen(false);
+                setIsGroupOpen(false);
+            }
+        });
+    };
+
+    const handleConfirm = () => {
+        switch (selectedCars.length) {
+            case 0:
+                alert("خودرویی برای ثبت حواله مشخص نگردیده است");
+                break;
+
+            default:
+                if (selectedCars.length > 11) {
+                    alert("ظرفیت انتخاب خودرو بیش از حد مجاز می باشد!");
+                }
+                break;
+        }
+    };
 
     return (
         <>
             <Card5 title="ثبت حواله" image="/media/svg/brand-logos/aven.svg">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h3 className="font-VazirBold text-2xl">
+                        <h3 className="font-YekanBold text-2xl">
                             شماره حواله:{" "}
                             <span className="px-4 text-green-700">10245</span>
                         </h3>
-                    </div>
-                    <div className="flex items-center justify-center gap-12">
-                        <div>
-                            <span className="font-Vazir text-lg">
-                                تاریخ:{" "}
-                                <span className="font-VazirBold text-indigo-500">
-                                    {moment().format("jYYYY/jM/jD")}
-                                </span>
-                            </span>
-                        </div>
-                        <div>
-                            <span className="font-Vazir text-lg">
-                                ساعت:{" "}
-                                <span className="font-VazirBold text-indigo-500">
-                                    {moment().locale("fa").format("HH:mm")}
-                                </span>
-                            </span>
-                        </div>
                     </div>
                     <div className="flex gap-4">
                         <span>
@@ -129,7 +185,7 @@ const DoubleBilllanding = () => {
                                 onChange={(e) => setIsCargo(e.target.checked)}
                             />
                         </span>
-                        <span className="font-VazirBold text-lg">
+                        <span className="font-YekanBold text-lg">
                             حواله از نوع{" "}
                             <span className="text-red-700">اعلام بار</span> می
                             باشد.
@@ -176,16 +232,18 @@ const DoubleBilllanding = () => {
                     </div>
                     <div className="mt-4 mb-4 grid grid-cols-4 gap-4">
                         <ProfessionalSelect
-                            getFieldProps={formik.getFieldProps}
+                            custom={true}
                             options={dropdownParkings(origins?.result)}
-                            onChange={handleSelectChange}
+                            onChange={originChange}
+                            value={originValue}
                             title="مبدا حمل"
                             placeholder=""
                         />
                         <ProfessionalSelect
-                            getFieldProps={formik.getFieldProps}
+                            custom={true}
                             options={dropdownParkings(origins?.result)}
-                            onChange={handleSelectChange}
+                            onChange={destinationChange}
+                            value={destinationValue}
                             title="مقصد حواله"
                             placeholder=""
                         />
@@ -236,7 +294,7 @@ const DoubleBilllanding = () => {
                 </form>
                 <div className="flex items-center justify-between">
                     <div className="">
-                        <span className="font-VazirBold text-2xl">
+                        <span className="font-YekanBold text-2xl">
                             تعداد خودروهای انتخاب شده:{" "}
                             <span className="text-indigo-600">
                                 {selectedCars.length}
@@ -268,36 +326,36 @@ const DoubleBilllanding = () => {
                         )}
                     />
                 </div>
+                <div className="mt-4 mb-2 w-full">
+                    <Button text="ثبت حواله" onClick={handleConfirm} />
+                </div>
             </Card5>
-            <Modal isOpen={isOpen} onClose={handleClose} className="w-[78rem]">
+            <Modal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                className="w-[78rem]"
+            >
                 <Card5
                     title="لیست خودروها"
                     image="/media/svg/brand-logos/aven.svg"
                     modalCard={true}
                 >
                     <div>
-                        <button
-                            onClick={handleClose}
-                            className="mb-4 rounded-lg bg-indigo-600 px-8 py-4"
-                        >
-                            <span className="font-VazirBold text-white">
-                                تایید
-                            </span>
-                        </button>
+                        <Button text="تایید" onClick={handleConfirmFromList} />
                     </div>
-                    <MainGrid
+                    <MainModalGrid
                         rowSelection={"multiple"}
                         rowMultiSelectWithClick={true}
                         data={cars?.result}
                         columnDefs={doubleBilllandingCarSelectGrid()}
                         selectedCars={selectedCars}
-                        setSelectedCars={setSelectedCars}
+                        setModalSelectedCars={setModalSelectedCars}
                     />
                 </Card5>
             </Modal>
             <Modal
                 isOpen={isGroupOpen}
-                onClose={handleGroupClose}
+                onClose={() => setIsGroupOpen(false)}
                 className="w-[78rem]"
             >
                 <Card5
@@ -308,8 +366,8 @@ const DoubleBilllanding = () => {
                     <Tab
                         data={gruopcars}
                         selectedCars={selectedCars}
-                        setSelectedCars={setSelectedCars}
-                        handleGroupClose={handleGroupClose}
+                        setModalSelectedCars={setModalSelectedCars}
+                        handleGroupClose={handleConfirmFromList}
                     />
                 </Card5>
             </Modal>

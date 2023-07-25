@@ -134,7 +134,7 @@ const CancelBilllannding = () => {
             <Modal isOpen={isOpen} onClose={handleClose} reqular>
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="flex justify-center items-center">
-                        <span className="text-center font-VazirBold">{`ایا از ابطال بارنامه به شماره ${billlanding?.id} اطمینان دارید؟`}</span>
+                        <span className="text-center font-YekanBold">{`ایا از ابطال بارنامه به شماره ${billlanding?.id} اطمینان دارید؟`}</span>
                     </div>
                     <div>
                         <Input placeholder='توضیحات'  reqular/>

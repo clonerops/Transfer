@@ -1,15 +1,16 @@
 import { FC, useState, useCallback } from "react";
 import { doubleBilllandingCarSelectGrid } from "../../../../_cloner/helpers/grid-value/double-billlanding-cars-select";
 import MainGrid from "../../../../_cloner/helpers/components/MainGrid";
+import MainModalGrid from "./MainModalGrid";
 
 interface IProps {
     title?: string
     cars?: any
     selectedCars: any
-    setSelectedCars: any
+    setModalSelectedCars: any
 }
 
-const ProvinceCollapse: FC<IProps> = ({ title, cars, selectedCars, setSelectedCars }) => {
+const ProvinceCollapse: FC<IProps> = ({ title, cars, selectedCars, setModalSelectedCars }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleCollapsible = () => {
@@ -22,7 +23,7 @@ const ProvinceCollapse: FC<IProps> = ({ title, cars, selectedCars, setSelectedCa
                 className="flex cursor-pointer items-center justify-between rounded-tl-md bg-blue-500 p-4 text-white"
                 onClick={toggleCollapsible}
             >
-                <h3 className="font-VazirBold text-lg text-white">{title}</h3>
+                <h3 className="font-YekanBold text-lg text-white">{title}</h3>
                 <span
                     className={`transform transition-transform ${
                         isOpen ? "rotate-180" : "rotate-0"
@@ -46,13 +47,13 @@ const ProvinceCollapse: FC<IProps> = ({ title, cars, selectedCars, setSelectedCa
             </div>
             {isOpen && (
                 <div className="bg-gray-200 p-4">
-                    <MainGrid
+                    <MainModalGrid
                         rowSelection={"multiple"}
                         rowMultiSelectWithClick={true}
                         data={cars}
                         columnDefs={doubleBilllandingCarSelectGrid()}
                         selectedCars={selectedCars}
-                        setSelectedCars={setSelectedCars}
+                        setModalSelectedCars={setModalSelectedCars}
 
                     />
                 </div>

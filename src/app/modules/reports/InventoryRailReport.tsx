@@ -69,7 +69,7 @@ const InventoryRailReport = () => {
         <button onClick={}>خروجی اکسل</button>
       </section> */}
       <section className='mt-8'>
-        <span className='font-VazirBold text-xl py-8'>نتیجه گزارش</span>
+        <span className='font-YekanBold text-xl py-8'>نتیجه گزارش</span>
         <MainGrid data={inventoryData} columnDefs={InventoryRails} />
       </section>
     </Card5>  

@@ -9,17 +9,17 @@ interface IProps {
     ref?: any;
     rowMultiSelectWithClick?: boolean;
     selectedCars?: any;
-    setSelectedCars?: any;
+    setModalSelectedCars?: any;
 }
 
-const MainGrid: FC<IProps> = ({
+const MainModalGrid: FC<IProps> = ({
     data,
     columnDefs,
     ref,
     rowSelection,
     rowMultiSelectWithClick,
     selectedCars,
-    setSelectedCars,
+    setModalSelectedCars,
 }) => {
 
     const [gridApi, setGridApi] = useState<any>(null);
@@ -62,7 +62,7 @@ const MainGrid: FC<IProps> = ({
     }, []);
 
     const onSelectionChanged = useCallback((event: any) => {
-        setSelectedCars(event.api.getSelectedRows());
+        setModalSelectedCars(event.api.getSelectedRows());
         // eslint-disable-next-line
     }, []);
 
@@ -107,4 +107,4 @@ const MainGrid: FC<IProps> = ({
     );
 };
 
-export default MainGrid;
+export default MainModalGrid;

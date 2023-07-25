@@ -10,7 +10,7 @@ const DriverListReport = () => {
     <Card5 title='لیست رانندگان فعال' image='/media/svg/brand-logos/aven.svg'>
     
       <section className='mt-8'>
-        <span className='py-8 font-VazirBold text-xl'>نتیجه گزارش</span>
+        <span className='py-8 font-YekanBold text-xl'>نتیجه گزارش</span>
         <MainGrid data={drivers} columnDefs={DriverList} />
       </section>
     </Card5>

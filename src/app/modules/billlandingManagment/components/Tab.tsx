@@ -1,5 +1,4 @@
-import { FC, useEffect, useState } from "react";
-import Collapsible from "./Collapse";
+import { FC, useState } from "react";
 import DealerCollapse from "./DealerCollapse";
 import ProvinceCollapse from "./ProvinceCollapse";
 import CityCollapse from "./CityCollapse";
@@ -7,14 +6,14 @@ import CityCollapse from "./CityCollapse";
 interface IProps {
     data: any;
     selectedCars: any;
-    setSelectedCars: any;
+    setModalSelectedCars: any;
     handleGroupClose: any;
 }
 
 const Tabs: FC<IProps> = ({
     data,
     selectedCars,
-    setSelectedCars,
+    setModalSelectedCars,
     handleGroupClose,
 }) => {
     const [activeTab, setActiveTab] = useState<number>(0);
@@ -65,7 +64,7 @@ const Tabs: FC<IProps> = ({
                         onClick={handleGroupClose}
                         className="rounded-lg bg-indigo-600 px-8 py-4"
                     >
-                        <span className="font-VazirBold text-white">تایید</span>
+                        <span className="font-YekanBold text-white">تایید</span>
                     </button>
                 </div>
             </div>
@@ -76,7 +75,7 @@ const Tabs: FC<IProps> = ({
                             title={item.factorName}
                             cars={item.cars}
                             selectedCars={selectedCars}
-                            setSelectedCars={setSelectedCars}
+                            setModalSelectedCars={setModalSelectedCars}
                         />
                     ))}
                 {activeTab === 1 &&
@@ -85,7 +84,7 @@ const Tabs: FC<IProps> = ({
                             title={item.factorName}
                             cars={item.cars}
                             selectedCars={selectedCars}
-                            setSelectedCars={setSelectedCars}
+                            setModalSelectedCars={setModalSelectedCars}
                         />
                     ))}
                 {activeTab === 2 &&
@@ -94,7 +93,7 @@ const Tabs: FC<IProps> = ({
                             title={item.factorName}
                             cars={item.cars}
                             selectedCars={selectedCars}
-                            setSelectedCars={setSelectedCars}
+                            setModalSelectedCars={setModalSelectedCars}
                         />
                     ))}
             </div>

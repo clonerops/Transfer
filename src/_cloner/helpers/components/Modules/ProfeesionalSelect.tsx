@@ -56,7 +56,7 @@ const ProfessionalSelect = (props: any) => {
                 gap: 8,
             }}
         >
-            <label className="text-sm">{props.title}</label>
+            <label className="text-md font-YekanBold">{props.title}</label>
             {props.custom ? (
                 <Select
                     options={props.options}

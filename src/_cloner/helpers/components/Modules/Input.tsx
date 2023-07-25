@@ -5,7 +5,7 @@ const Input = (props: any) => {
         <>
             {props.login ? (
                 <div className="fv-row mb-8">
-                    <label className="form-label fs-6 fw-bolder text-dark">
+                    <label className="form-label fs-6 fw-bolder text-dark font-YekanBold">
                         {props.title}
                     </label>
                     <input
@@ -39,7 +39,7 @@ const Input = (props: any) => {
                     <input
                         {...props.getFieldProps(props.name)}
                         className={clsx(
-                            "form-control h-12 bg-transparent text-center font-VazirBold text-2xl",
+                            "form-control h-12 bg-transparent text-center font-YekanBold text-2xl",
                             {
                                 "is-invalid": props.touched && props.errors,
                             },
@@ -67,7 +67,7 @@ const Input = (props: any) => {
                         defaultValue={props.defaultValue}
                         ref={props.ref}
                         className={clsx(
-                            `${props.className} form-control text-md h-10 border border-gray-400 bg-transparent text-center font-VazirBold`,
+                            `${props.className} form-control text-md h-10 border border-gray-400 bg-transparent text-center font-YekanBold`,
                             {
                                 "is-invalid": props.touched && props.errors,
                             },
@@ -93,7 +93,7 @@ const Input = (props: any) => {
                 </div>
             ) : props.reqular ? (
                 <div className="">
-                    <label className="dropdown__label">
+                    <label className="dropdown__label font-YekanBold">
                         {props.title}
                     </label>
                     <input
@@ -103,7 +103,7 @@ const Input = (props: any) => {
                         name={props.name}
                         ref={props.ref}
                         value={props.value}
-                        className={`form-control rounded-md text-md h-11 border border-gray-400 bg-transparent text-center font-VazirBold ${props.className}`}
+                        className={`form-control rounded-md text-md h-11 border border-gray-400 bg-transparent text-center font-YekanBold ${props.className}`}
                         id={props.id}
                         disabled={props.disabled}
                         onChange={props.onChange}
@@ -119,7 +119,7 @@ const Input = (props: any) => {
                         {...props.getFieldProps(props.name)}
                         defaultValue={props.defaultValue}
                         className={clsx(
-                            `${props.className} form-control text-md h-10 border border-gray-400 bg-transparent text-center font-VazirBold`,
+                            `${props.className} form-control text-md h-10 border border-gray-400 bg-transparent text-center font-YekanBold`,
                             {
                                 "is-invalid": props.touched && props.errors,
                             },

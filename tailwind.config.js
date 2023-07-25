@@ -6,11 +6,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "Vazir": ["Vazir"],
-        "VazirBold": ["VazirBold"],
-        "VazirLight": ["VazirLight"],
-        "VazirMedium": ["VazirMedium"],
-        "VazirUltraLight": ["VazirUltraLight"],
+        "Yekan": ["Yekan"],
+        "YekanBold": ["YekanBold"],
+        "YekanLight": ["YekanLight"],
+        "YekanMedium": ["YekanMedium"],
+        "YekanUltraLight": ["YekanUltraLight"],
       },
     },
   },

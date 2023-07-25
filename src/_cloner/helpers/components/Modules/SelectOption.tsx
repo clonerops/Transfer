@@ -14,7 +14,7 @@ const SelectOption = (props: any) => {
   return props.isMulti ? (
     <>
       <div className='flex flex-col items-start p-1 py-2'>
-        <label className='font-IRANSans text-md inline-block p-2 text-left font-VazirBold'>
+        <label className='font-IRANSans text-md inline-block p-2 text-left font-YekanBold'>
           {props.title}:
         </label>
         <Select
